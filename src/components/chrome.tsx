@@ -62,7 +62,7 @@ export function TopStrip({ credits, onCoin }: { credits: number; onCoin: () => v
   return (
     <div className="relative z-[60] flex items-center justify-between gap-4 overflow-hidden border-b-[3px] border-[#111110] bg-[#111110] px-4 py-1.5 text-white md:px-8">
       <p className="truncate font-pixel text-[10px] tracking-[0.25em] md:text-[11px]">
-        ORB STUDIOS <span className="text-[#FFD900]">*</span> INDIE ARCADE TCG <span className="text-[#FFD900]">*</span>{" "}
+        ORB STUDIOS <span className="text-[#FFD900]">★</span> INDIE ARCADE TCG <span className="text-[#FFD900]">★</span>{" "}
         <span className="hidden sm:inline">16 CARDS REVEALED — BY ANIRUDH &amp; LAKSHYA (GANU)</span>
       </p>
       <div className="flex shrink-0 items-center gap-3">
@@ -96,7 +96,7 @@ export function SampleNoticeBanner() {
           </p>
         </div>
         <span className="hidden font-pixel text-[10px] tracking-widest text-[#111110]/70 lg:inline">
-          OFFICIAL SITE IN DEV * ANIRUDH &amp; LAKSHYA
+          OFFICIAL SITE IN DEV ★ ANIRUDH &amp; LAKSHYA
         </span>
       </div>
     </aside>

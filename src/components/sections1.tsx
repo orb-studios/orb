@@ -71,7 +71,7 @@ export function Manifesto() {
               </div>
               {/* stamp */}
               <div className="absolute -bottom-6 -right-3 rotate-[8deg] rounded-lg border-[3.5px] border-[#FF0B0B] bg-white/90 px-4 py-2 font-display text-sm text-[#FF0B0B] shadow-[4px_4px_0_#111110] md:right-8">
-                INDIE PROJECT
+                INDIE ★ PROJECT
               </div>
             </div>
           </div>

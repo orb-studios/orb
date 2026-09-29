@@ -67,12 +67,12 @@ export function HowTo() {
               <span>VS</span><span className="font-jp text-xl">対戦</span>
             </div>
             <div className="flex items-center gap-4 md:flex-row-reverse md:text-right">
-              <span className="grid h-14 w-14 shrink-0 place-items-center rounded-full border-[3px] border-white bg-[#00b4ff] font-pixel text-base font-bold">
-                CPU
+              <span className="grid h-14 w-14 shrink-0 place-items-center rounded-full border-[3px] border-white bg-[#00b4ff] font-display text-xl">
+                👾
               </span>
               <div>
                 <p className="font-display text-lg">CPU — ARCADE GHOST</p>
-                <p className="font-pixel text-xs tracking-[0.2em] text-white/60">DIFFICULTY: NORMAL</p>
+                <p className="font-pixel text-xs tracking-[0.2em] text-white/60">DIFFICULTY: NORMAL ★☆☆</p>
               </div>
             </div>
           </div>
@@ -214,9 +214,9 @@ export function Packs({ onCoin }: { onCoin: () => void }) {
         <Marquee reverse>
           {Array.from({ length: 6 }).map((_, i) => (
             <span key={i} className="flex items-center gap-5 pr-5 font-display text-sm">
-              <span>NO DUPES IN A BOX</span><span>*</span>
-              <span className="font-jp">ダブりなし</span><span>*</span>
-              <span>HOLO IN EVERY 3RD PACK</span><span>*</span>
+              <span>NO DUPES IN A BOX</span><span>★</span>
+              <span className="font-jp">ダブりなし</span><span>★</span>
+              <span>HOLO IN EVERY 3RD PACK</span><span>★</span>
             </span>
           ))}
         </Marquee>
@@ -324,7 +324,7 @@ export function Footer({ go }: { go: (p: "home" | "play") => void }) {
               <p><strong className="text-[#111110]">Lakshya</strong> (ganu)<br />Art &amp; Character Design</p>
             </div>
             <p className="mt-3 inline-block rounded-full border-2 border-[#111110] bg-[#FFD900] px-3 py-1 font-pixel text-[10px] tracking-widest text-[#111110]">
-              INDIE DUO * INDIA
+              INDIE DUO ★ INDIA
             </p>
           </div>
         </div>

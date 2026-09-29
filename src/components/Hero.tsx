@@ -175,7 +175,7 @@ export function Hero({ go, onCoin }: { go: (p: "home" | "play") => void; onCoin:
         <Marquee fast>
           {Array.from({ length: 8 }).map((_, i) => (
             <span key={i} className="flex items-center gap-6 pr-6 font-pixel text-sm tracking-[0.3em]">
-              <span className="text-[#FFD900]">* INSERT COIN *</span>
+              <span className="text-[#FFD900]">★ INSERT COIN ★</span>
               <span>コインをいれてね</span>
               <span className="text-[#FF0B0B]">●</span>
               <span className="font-display text-sm tracking-normal">COLLECT — BATTLE — TRADE</span>

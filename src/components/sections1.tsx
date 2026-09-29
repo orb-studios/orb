@@ -47,36 +47,31 @@ export function Manifesto() {
               </p>
               <p className="mt-4 text-[15.5px] leading-relaxed text-[#111110]/75">
                 so we made <strong className="text-[#111110]">orb</strong>: a pocket-sized trading card
-                game that feels like a Saturday morning cartoon crashed into a Japanese game center.
+                game inspired by retro arcade fighters and Saturday morning cartoons.
                 Chunky HP numbers. Loud elements. Creatures with personalities bigger than their attack stats.
               </p>
               <p className="mt-3 text-[15.5px] leading-relaxed text-[#111110]/75">
-                Handcrafted creature designs by illustrator <strong className="text-[#111110]">GANU</strong>.
-                Zero investors. Just ink, imagination, and the belief that card games should make you grin first —
-                and think second.
+                Handcrafted creature designs and art by <strong className="text-[#111110]">Lakshya (ganu)</strong>,
+                code &amp; web build by <strong className="text-[#111110]">Anirudh (anonspud)</strong>.
+                Just two friends building an indie card game for fun.
               </p>
               <div className="ticket-edge my-6 opacity-30" />
               <div className="flex flex-wrap items-center gap-3">
-                <div className="flex -space-x-3">
-                  {["G", "A", "N", "U", "★"].map((c, i) => (
-                    <span
-                      key={c + i}
-                      className={cn(
-                        "grid h-10 w-10 place-items-center rounded-full border-[3px] border-[#111110] font-display text-sm",
-                        i % 2 ? "bg-[#111110] text-[#FFD900]" : "bg-[#FF0B0B] text-white"
-                      )}
-                    >
-                      {c}
-                    </span>
-                  ))}
+                <div className="flex -space-x-2">
+                  <span className="grid h-10 w-10 place-items-center rounded-full border-[3px] border-[#111110] bg-[#FF0B0B] font-display text-xs text-white">
+                    A
+                  </span>
+                  <span className="grid h-10 w-10 place-items-center rounded-full border-[3px] border-[#111110] bg-[#111110] font-display text-xs text-[#FFD900]">
+                    L
+                  </span>
                 </div>
                 <p className="font-pixel text-[11px] tracking-[0.2em] text-[#111110]/60">
-                  HAND-DRAWN ART BY GANU ● ORB STUDIOS ● オーブスタジオ
+                  CREATED BY ANIRUDH (ANONSPUD) &amp; LAKSHYA (GANU)
                 </p>
               </div>
               {/* stamp */}
               <div className="absolute -bottom-6 -right-3 rotate-[8deg] rounded-lg border-[3.5px] border-[#FF0B0B] bg-white/90 px-4 py-2 font-display text-sm text-[#FF0B0B] shadow-[4px_4px_0_#111110] md:right-8">
-                認定 ★ CERTIFIED FRESH
+                INDIE PROJECT
               </div>
             </div>
           </div>
@@ -130,7 +125,7 @@ export function Manifesto() {
                 </p>
               </div>
               <p className="font-pixel text-[11px] tracking-[0.2em] text-[#FFD900]">
-                ART &amp; CREATURE DESIGN: GANU ● ORB STUDIOS
+                ART: LAKSHYA (GANU) * WEB: ANIRUDH (ANONSPUD)
               </p>
             </div>
           </div>

@@ -62,8 +62,8 @@ export function TopStrip({ credits, onCoin }: { credits: number; onCoin: () => v
   return (
     <div className="relative z-[60] flex items-center justify-between gap-4 overflow-hidden border-b-[3px] border-[#111110] bg-[#111110] px-4 py-1.5 text-white md:px-8">
       <p className="truncate font-pixel text-[10px] tracking-[0.25em] md:text-[11px]">
-        ORB STUDIOS <span className="text-[#FFD900]">★</span> INDIE ARCADE TCG <span className="text-[#FFD900]">★</span>{" "}
-        <span className="hidden sm:inline">16 CARDS REVEALED — TOKYO / OSAKA — 東京</span>
+        ORB STUDIOS <span className="text-[#FFD900]">*</span> INDIE ARCADE TCG <span className="text-[#FFD900]">*</span>{" "}
+        <span className="hidden sm:inline">16 CARDS REVEALED — BY ANIRUDH &amp; LAKSHYA (GANU)</span>
       </p>
       <div className="flex shrink-0 items-center gap-3">
         <button
@@ -89,14 +89,14 @@ export function SampleNoticeBanner() {
       <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-2.5">
         <div className="flex flex-wrap items-center gap-2">
           <span className="inline-flex items-center gap-1 rounded-full border-2 border-[#111110] bg-[#FF0B0B] px-2.5 py-0.5 font-display text-[10px] text-white shadow-[2px_2px_0_#111110]">
-            <AlertTriangle className="h-3 w-3" /> SAMPLE PREVIEW / 仮設サイト
+            <AlertTriangle className="h-3 w-3" /> SAMPLE PREVIEW
           </span>
           <p className="font-pixel text-[11px] tracking-wide sm:text-xs">
-            <strong>NOTICE:</strong> This is a temporary showcase website while the official Orb Studios platform is under construction (WIP). This sample site will be deleted soon!
+            <strong>NOTICE:</strong> This is a temporary sample website while the official Orb Studios platform is under construction (WIP). This sample site will be deleted soon!
           </p>
         </div>
         <span className="hidden font-pixel text-[10px] tracking-widest text-[#111110]/70 lg:inline">
-          OFFICIAL SITE IN DEV ● ORB STUDIOS
+          OFFICIAL SITE IN DEV * ANIRUDH &amp; LAKSHYA
         </span>
       </div>
     </aside>

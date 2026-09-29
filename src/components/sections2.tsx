@@ -67,10 +67,12 @@ export function HowTo() {
               <span>VS</span><span className="font-jp text-xl">対戦</span>
             </div>
             <div className="flex items-center gap-4 md:flex-row-reverse md:text-right">
-              <span className="grid h-14 w-14 shrink-0 place-items-center rounded-full border-[3px] border-white bg-[#00b4ff] font-display text-xl">👾</span>
+              <span className="grid h-14 w-14 shrink-0 place-items-center rounded-full border-[3px] border-white bg-[#00b4ff] font-pixel text-base font-bold">
+                CPU
+              </span>
               <div>
-                <p className="font-display text-lg">CPU — ゲーセンゴースト</p>
-                <p className="font-pixel text-xs tracking-[0.2em] text-white/60">DIFFICULTY: やさしい ★☆☆</p>
+                <p className="font-display text-lg">CPU — ARCADE GHOST</p>
+                <p className="font-pixel text-xs tracking-[0.2em] text-white/60">DIFFICULTY: NORMAL</p>
               </div>
             </div>
           </div>
@@ -212,9 +214,9 @@ export function Packs({ onCoin }: { onCoin: () => void }) {
         <Marquee reverse>
           {Array.from({ length: 6 }).map((_, i) => (
             <span key={i} className="flex items-center gap-5 pr-5 font-display text-sm">
-              <span>NO DUPES IN A BOX</span><span>★</span>
-              <span className="font-jp">ダブりなし</span><span>★</span>
-              <span>HOLO IN EVERY 3RD PACK</span><span>★</span>
+              <span>NO DUPES IN A BOX</span><span>*</span>
+              <span className="font-jp">ダブりなし</span><span>*</span>
+              <span>HOLO IN EVERY 3RD PACK</span><span>*</span>
             </span>
           ))}
         </Marquee>
@@ -279,12 +281,11 @@ export function Footer({ go }: { go: (p: "home" | "play") => void }) {
               />
               <span className="text-left leading-none">
                 <span className="block font-display text-2xl">orb</span>
-                <span className="block font-pixel text-[9px] tracking-[0.3em] opacity-60">ORB STUDIOS — 東京</span>
+                <span className="block font-pixel text-[9px] tracking-[0.3em] opacity-60">ORB STUDIOS</span>
               </span>
             </button>
             <p className="mt-4 max-w-[280px] text-sm leading-relaxed text-[#111110]/65">
-              An indie arcade trading card game. Hand-drawn in Osaka, coded with
-              love, balanced with arguments.
+              An indie arcade card game created by two friends. Hand-drawn art by Lakshya (ganu), code &amp; build by Anirudh (anonspud).
             </p>
             <div className="mt-4 flex gap-2.5">
               {[Discord, Twitter, Youtube].map((Icon, i) => (
@@ -309,21 +310,21 @@ export function Footer({ go }: { go: (p: "home" | "play") => void }) {
             </ul>
           </div>
           <div>
-            <p className="font-display text-sm tracking-wide">STUDIO <span className="font-jp text-xs opacity-50">スタジオ</span></p>
+            <p className="font-display text-sm tracking-wide">ABOUT <span className="font-jp text-xs opacity-50">について</span></p>
             <ul className="mt-3 space-y-2 text-sm text-[#111110]/70">
-              {["About Orb Studios", "Meet GANU", "Press kit", "Contact"].map((l) => (
+              {["Manifesto", "Creators", "Creatures"].map((l) => (
                 <li key={l}><a href="#manifesto" className="transition hover:text-[#FF0B0B] hover:underline">{l}</a></li>
               ))}
             </ul>
           </div>
           <div>
-            <p className="font-display text-sm tracking-wide">VISIT <span className="font-jp text-xs opacity-50">あそびにきて</span></p>
-            <p className="mt-3 flex items-start gap-2 text-sm leading-relaxed text-[#111110]/70">
-              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#FF0B0B]" />
-              2F Game Center Mikado,<br />Takadanobaba, Tokyo<br />高田馬場ミカド2F
-            </p>
-            <p className="mt-3 inline-block rounded-full border-2 border-[#111110] bg-[#2fbf4a] px-3 py-1 font-pixel text-[10px] tracking-widest text-white">
-              ● OPEN WEEKENDS 12–20時
+            <p className="font-display text-sm tracking-wide">CREATORS <span className="font-jp text-xs opacity-50">つくりて</span></p>
+            <div className="mt-3 space-y-2 text-sm leading-relaxed text-[#111110]/70">
+              <p><strong className="text-[#111110]">Anirudh</strong> (anonspud)<br />Code &amp; Web</p>
+              <p><strong className="text-[#111110]">Lakshya</strong> (ganu)<br />Art &amp; Character Design</p>
+            </div>
+            <p className="mt-3 inline-block rounded-full border-2 border-[#111110] bg-[#FFD900] px-3 py-1 font-pixel text-[10px] tracking-widest text-[#111110]">
+              INDIE DUO * INDIA
             </p>
           </div>
         </div>
@@ -340,7 +341,7 @@ export function Footer({ go }: { go: (p: "home" | "play") => void }) {
           </div>
           <p className="mt-2.5 text-xs leading-relaxed text-[#111110]/80">
             This showcase website was built with AI code assistance as a temporary preview while the full game platform is in development.
-            <strong className="text-[#FF0B0B]"> All card illustrations, creature designs, character artwork, and logos were 100% created by human artists at Orb Studios (Art &amp; Character Design: GANU).</strong> No generative AI was used for any artwork, card assets, or brand identity.
+            <strong className="text-[#FF0B0B]"> All card illustrations, creature designs, character artwork, and logos were 100% created by human artists (Art &amp; Character Design: Lakshya / ganu; Development &amp; Code: Anirudh / anonspud).</strong> No generative AI was used for any artwork, card assets, or brand identity.
           </p>
         </div>
 

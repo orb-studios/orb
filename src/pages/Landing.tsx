@@ -7,19 +7,19 @@ import { useReveal } from "../hooks/useReveal";
 
 function WallOfLove() {
   const quotes = [
-    { n: "PIXELMAMA", jp: "さいこう!", s: "Cracken is my son now. I would die for Cracken. 10/10 would get hugged again.", c: "#00b4ff" },
-    { n: "DECK GREMLIN", jp: "つよい", s: "Won my first duel in 47 seconds then lost 6 in a row to a 9-year-old. No notes. Perfect game.", c: "#FF0B0B" },
-    { n: "HOLO HUNTER", jp: "キラキラ", s: "Pulled holo Kirin on pack three and screamed so loud my neighbour called the konbini. Worth it.", c: "#ff5c00" },
+    { n: "PLAYTESTER 01", jp: "さいこう", s: "Cracken is pure joy. The hand-drawn aesthetic feels completely different from generic digital cards.", c: "#00b4ff" },
+    { n: "PLAYTESTER 02", jp: "たのしい", s: "60-second duel pace is super quick. Fast rounds, high stakes, easy to learn.", c: "#FF0B0B" },
+    { n: "PLAYTESTER 03", jp: "キラキラ", s: "The physical hand-drawn card frames and creature illustrations by Lakshya give it genuine personality.", c: "#ff5c00" },
   ];
   return (
     <section className="relative overflow-hidden border-y-[3.5px] border-[#111110] bg-[#FFF7E8]">
       <div className="mx-auto max-w-7xl px-4 py-16 md:px-8 md:py-20">
         <div className="reveal mb-8 flex flex-wrap items-center justify-between gap-4">
           <h2 className="font-display text-2xl md:text-4xl">
-            WALL OF LOVE <span className="font-jp text-lg text-[#FF0B0B]">みんなのこえ</span>
+            PLAYTEST VOICES <span className="font-jp text-lg text-[#FF0B0B]">みんなのこえ</span>
           </h2>
           <p className="flex items-center gap-1.5 font-pixel text-xs tracking-[0.2em] text-[#111110]/60">
-            <Star className="h-4 w-4 fill-[#FFD900]" /> 4.9 — 1,203 ARCADE REVIEWS
+            <Star className="h-4 w-4 fill-[#FFD900]" /> EARLY INDIE PLAYTEST FEEDBACK
           </p>
         </div>
         <div className="grid gap-5 md:grid-cols-3">
@@ -43,11 +43,11 @@ function WallOfLove() {
       </div>
       <div className="border-t-[3.5px] border-[#111110] bg-[#111110] py-2.5 text-white">
         <Marquee fast>
-          {Array.from({ length: 8 }).map((_, i) => (
+          {Array.from({ length: 6 }).map((_, i) => (
             <span key={i} className="flex items-center gap-6 pr-6 font-pixel text-xs tracking-[0.3em]">
-              <span>★ ★ ★ ★ ★</span>
-              <span className="font-display text-sm tracking-normal">“THE CUTEST WAY TO LOSE FRIENDS” — ARCADE TIMES</span>
-              <span className="text-[#FFD900]">●</span>
+              <span>* * * * *</span>
+              <span className="font-display text-sm tracking-normal">HAND-DRAWN INDIE TCG BY ANIRUDH &amp; LAKSHYA — ORB STUDIOS</span>
+              <span className="text-[#FFD900]">*</span>
             </span>
           ))}
         </Marquee>

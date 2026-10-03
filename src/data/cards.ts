@@ -199,7 +199,7 @@ export const CARDS: OrbCard[] = [
     element: "WATER",
     hp: 220,
     atk: 280,
-    art: "/cards/craken.jpg",
+    art: "/cards/cracken.jpg",
     lore: "Not a kraken. A cracken — smaller, rounder, and 300% more cheerful. Its hug has sunk ships (with love).",
     move: "TIDAL HUG",
     moveJp: "タイダルハグ",

@@ -100,6 +100,70 @@ body {
   text-shadow: none;
 }
 
+/* On RED backgrounds: switch selection to vibrant yolk yellow with black ink text for maximum readability */
+.bg-\[\#FF0B0B\] ::selection,
+.bg-\[\#FF0B0B\]::selection,
+.bg-\[\#ff0b0b\] ::selection,
+.bg-\[\#ff0b0b\]::selection,
+.bg-\[\#C40000\] ::selection,
+.bg-\[\#C40000\]::selection,
+.bg-\[\#c40000\] ::selection,
+.bg-\[\#c40000\]::selection,
+.bg-\[\#d60000\] ::selection,
+.bg-\[\#d60000\]::selection,
+.bg-\[\#ff5c00\] ::selection,
+.bg-\[\#ff5c00\]::selection,
+[class*="bg-[#FF0B0B]"] ::selection,
+[class*="bg-[#FF0B0B]"]::selection,
+[class*="bg-[#ff0b0b]"] ::selection,
+[class*="bg-[#ff0b0b]"]::selection,
+[class*="bg-[#C40000]"] ::selection,
+[class*="bg-[#C40000]"]::selection,
+[class*="bg-[#c40000]"] ::selection,
+[class*="bg-[#c40000]"]::selection,
+[class*="bg-[#d60000]"] ::selection,
+[class*="bg-[#d60000]"]::selection,
+[style*="255, 11, 11"] ::selection,
+[style*="255, 11, 11"]::selection,
+[style*="255, 92, 0"] ::selection,
+[style*="255, 92, 0"]::selection,
+[style*="#FF0B0B"] ::selection,
+[style*="#FF0B0B"]::selection,
+[style*="#ff0b0b"] ::selection,
+[style*="#ff0b0b"]::selection,
+[style*="#ff5c00"] ::selection,
+[style*="#ff5c00"]::selection,
+[data-bg="red"] ::selection,
+[data-bg="red"]::selection {
+  background: #FFD900 !important;
+  color: #111110 !important;
+  -webkit-text-fill-color: #111110 !important;
+  text-shadow: none !important;
+}
+
+/* On YELLOW backgrounds (e.g. #how section): use Orb red with white text */
+.bg-\[\#FFD900\] ::selection,
+.bg-\[\#FFD900\]::selection,
+.bg-\[\#ffd900\] ::selection,
+.bg-\[\#ffd900\]::selection,
+[class*="bg-[#FFD900]"] ::selection,
+[class*="bg-[#FFD900]"]::selection,
+[class*="bg-[#ffd900]"] ::selection,
+[class*="bg-[#ffd900]"]::selection,
+[style*="#FFD900"] ::selection,
+[style*="#FFD900"]::selection,
+[style*="#ffd900"] ::selection,
+[style*="#ffd900"]::selection,
+[style*="255, 217, 0"] ::selection,
+[style*="255, 217, 0"]::selection,
+[data-bg="yellow"] ::selection,
+[data-bg="yellow"]::selection {
+  background: #FF0B0B !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  text-shadow: none !important;
+}
+
 /* ---------- custom utilities ---------- */
 .font-display { font-family: var(--font-display); }
 .font-bubble { font-family: var(--font-bubble); }

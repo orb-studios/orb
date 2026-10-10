@@ -45,10 +45,22 @@ export function JPBadge({
   className?: string;
   vertical?: boolean;
 }) {
+  const bgLower = bg?.toLowerCase() ?? "";
+  const isRed =
+    bgLower === "#ff0b0b" ||
+    bgLower === "#c40000" ||
+    bgLower === "#ff5c00" ||
+    bgLower.includes("255, 11, 11") ||
+    bgLower.includes("255, 92, 0");
+  const isYellow = bgLower === "#ffd900" || bgLower.includes("255, 217, 0");
+
   return (
     <span
+      data-bg={isRed ? "red" : isYellow ? "yellow" : undefined}
       className={cn(
         "inline-flex items-center gap-2 border-[3px] px-3 py-1.5 font-display shadow-[4px_4px_0_#111110]",
+        isRed && "selection:bg-[#FFD900] selection:text-[#111110]",
+        isYellow && "selection:bg-[#FF0B0B] selection:text-white",
         className
       )}
       style={{ background: bg, color, borderColor: "#111110" }}

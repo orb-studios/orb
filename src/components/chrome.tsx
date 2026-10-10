@@ -1,58 +1,165 @@
-import { useEffect, useState } from "react";
-import { Gamepad2, Menu, X, Coins, Volume2, AlertTriangle } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Gamepad2, Menu, X, Coins, Volume2 } from "lucide-react";
 import { cn } from "../utils/cn";
 
 /* ---------- custom cursor ---------- */
 export function Cursor() {
-  const [pos, setPos] = useState({ x: -100, y: -100 });
-  const [ring, setRing] = useState({ x: -100, y: -100 });
+  const dotRef = useRef<HTMLDivElement>(null);
+  const ringRef = useRef<HTMLDivElement>(null);
+
   const [hover, setHover] = useState(false);
+  const [bgMode, setBgMode] = useState<"red" | "dark" | "yellow" | "light">("light");
+  const [clicking, setClicking] = useState(false);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     document.body.classList.add("cursor-none-fine");
-    const move = (e: MouseEvent) => {
-      setPos({ x: e.clientX, y: e.clientY });
-      const t = e.target as HTMLElement;
-      setHover(!!t.closest("a,button,.cursor-pointer"));
+
+    let mouseX = -100;
+    let mouseY = -100;
+    let ringX = -100;
+    let ringY = -100;
+    let initialized = false;
+    let raf: number;
+
+    const getBgMode = (el: HTMLElement | null): "red" | "dark" | "yellow" | "light" => {
+      let curr = el;
+      while (curr && curr !== document.documentElement) {
+        const bg = window.getComputedStyle(curr).backgroundColor;
+        if (bg && bg !== "rgba(0, 0, 0, 0)" && bg !== "transparent") {
+          const match = bg.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+          if (match) {
+            const r = Number(match[1]);
+            const g = Number(match[2]);
+            const b = Number(match[3]);
+            if (r > 190 && g < 80 && b < 80) return "red";
+            if (r < 50 && g < 50 && b < 50) return "dark";
+            if (r > 200 && g > 180 && b < 60) return "yellow";
+            return "light";
+          }
+        }
+        curr = curr.parentElement;
+      }
+      return "light";
     };
-    window.addEventListener("mousemove", move);
+
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+
+      if (!initialized) {
+        ringX = mouseX;
+        ringY = mouseY;
+        initialized = true;
+        setVisible(true);
+      }
+
+      const t = e.target as HTMLElement | null;
+      if (t) {
+        const isInteractive = !!t.closest("a, button, [role='button'], input, .cursor-pointer");
+        setHover(isInteractive);
+        setBgMode(getBgMode(t));
+      }
+    };
+
+    const handleMouseDown = () => setClicking(true);
+    const handleMouseUp = () => setClicking(false);
+    const handleMouseEnter = () => setVisible(true);
+    const handleMouseLeave = () => setVisible(false);
+
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    window.addEventListener("mousedown", handleMouseDown);
+    window.addEventListener("mouseup", handleMouseUp);
+    document.addEventListener("mouseenter", handleMouseEnter);
+    document.addEventListener("mouseleave", handleMouseLeave);
+
+    const loop = () => {
+      ringX += (mouseX - ringX) * 0.22;
+      ringY += (mouseY - ringY) * 0.22;
+
+      if (dotRef.current) {
+        dotRef.current.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+      }
+      if (ringRef.current) {
+        ringRef.current.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
+      }
+
+      raf = requestAnimationFrame(loop);
+    };
+
+    raf = requestAnimationFrame(loop);
+
     return () => {
-      window.removeEventListener("mousemove", move);
+      cancelAnimationFrame(raf);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mousedown", handleMouseDown);
+      window.removeEventListener("mouseup", handleMouseUp);
+      document.removeEventListener("mouseenter", handleMouseEnter);
+      document.removeEventListener("mouseleave", handleMouseLeave);
       document.body.classList.remove("cursor-none-fine");
     };
   }, []);
 
-  useEffect(() => {
-    let raf: number;
-    const tick = () => {
-      setRing((r) => ({ x: r.x + (pos.x - r.x) * 0.16, y: r.y + (pos.y - r.y) * 0.16 }));
-      raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [pos]);
+  if (!visible) return null;
+
+  // Authentic Orb Studios theme color mapping based on hovered background
+  const dotColorClass =
+    bgMode === "red"
+      ? "bg-[#FFD900] border-[#111110]" // on red background: bright yolk yellow dot with black border
+      : bgMode === "dark"
+      ? "bg-[#FFD900] border-white" // on dark background: bright yolk yellow dot with white rim
+      : bgMode === "yellow"
+      ? "bg-[#FF0B0B] border-[#111110]" // on yellow background: orb red dot
+      : "bg-[#FF0B0B] border-[#111110]"; // on cream/white: orb red dot
+
+  const ringThemeClass =
+    bgMode === "red"
+      ? hover
+        ? "h-14 w-14 border-[#111110] bg-[#FFD900] text-[#111110] shadow-[3px_3px_0_#111110]"
+        : "h-9 w-9 border-white bg-white/35"
+      : bgMode === "dark"
+      ? hover
+        ? "h-14 w-14 border-[#FFD900] bg-[#FFD900] text-[#111110] shadow-[3px_3px_0_#111110]"
+        : "h-9 w-9 border-white/70 bg-white/20"
+      : bgMode === "yellow"
+      ? hover
+        ? "h-14 w-14 border-[#111110] bg-[#111110] text-[#FFD900] shadow-[3px_3px_0_#111110]"
+        : "h-9 w-9 border-[#111110]/60 bg-[#111110]/15"
+      : hover
+      ? "h-14 w-14 border-[#111110] bg-[#FFD900] text-[#111110] shadow-[3px_3px_0_#111110]"
+      : "h-9 w-9 border-[#111110]/60 bg-[#111110]/10";
 
   return (
     <div className="pointer-events-none fixed inset-0 z-[200] hidden [@media(pointer:fine)]:block" aria-hidden>
+      {/* Focal dot */}
       <div
-        className="absolute h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-[#111110] bg-[#FF0B0B]"
-        style={{ left: pos.x, top: pos.y }}
-      />
-      <div
+        ref={dotRef}
         className={cn(
-          "absolute -translate-x-1/2 -translate-y-1/2 rounded-full border-[3px] border-[#111110] transition-all duration-200",
-          hover ? "h-14 w-14 bg-[#FFD900]/90" : "h-9 w-9 bg-white/70"
+          "absolute left-0 top-0 h-3.5 w-3.5 rounded-full border-2 transition-[background-color,border-color,transform] duration-150 ease-out",
+          dotColorClass,
+          clicking && "scale-75"
         )}
-        style={{ left: ring.x, top: ring.y }}
       />
-      {hover && (
-        <div
-          className="absolute -translate-x-1/2 -translate-y-1/2 font-pixel text-[10px] font-bold tracking-widest"
-          style={{ left: ring.x, top: ring.y }}
-        >
-          GO!
-        </div>
-      )}
+      {/* Magnetic follower ring */}
+      <div
+        ref={ringRef}
+        className={cn(
+          "absolute left-0 top-0 grid place-items-center rounded-full border-[3px] select-none transition-[width,height,background-color,border-color,transform] duration-150 ease-out",
+          ringThemeClass,
+          clicking && "scale-90"
+        )}
+      >
+        {hover && (
+          <span
+            className={cn(
+              "font-display text-[10px] font-bold tracking-widest leading-none",
+              bgMode === "yellow" ? "text-[#FFD900]" : "text-[#111110]"
+            )}
+          >
+            GO!
+          </span>
+        )}
+      </div>
     </div>
   );
 }
@@ -79,27 +186,6 @@ export function TopStrip({ credits, onCoin }: { credits: number; onCoin: () => v
         </span>
       </div>
     </div>
-  );
-}
-
-/* ---------- sample/temporary site notice banner ---------- */
-export function SampleNoticeBanner() {
-  return (
-    <aside aria-label="Sample notice" className="relative z-[65] border-b-[3px] border-[#111110] bg-[#FFD900] px-4 py-2 text-[#111110]">
-      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-2.5">
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="inline-flex items-center gap-1 rounded-full border-2 border-[#111110] bg-[#FF0B0B] px-2.5 py-0.5 font-display text-[10px] text-white shadow-[2px_2px_0_#111110]">
-            <AlertTriangle className="h-3 w-3" /> SAMPLE PREVIEW
-          </span>
-          <p className="font-pixel text-[11px] tracking-wide sm:text-xs">
-            <strong>NOTICE:</strong> This is a temporary sample website while the official Orb Studios platform is under construction (WIP). This sample site will be deleted soon!
-          </p>
-        </div>
-        <span className="hidden font-pixel text-[10px] tracking-widest text-[#111110]/70 lg:inline">
-          OFFICIAL SITE IN DEV ★ ANIRUDH &amp; LAKSHYA
-        </span>
-      </div>
-    </aside>
   );
 }
 

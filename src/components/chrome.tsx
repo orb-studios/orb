@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Gamepad2, Menu, X, Volume2, VolumeX } from "lucide-react";
+import { Gamepad2, Menu, X } from "lucide-react";
 import { cn } from "../utils/cn";
 
 /* ---------- custom cursor ---------- */
@@ -182,17 +182,7 @@ export function Cursor() {
 }
 
 /* ---------- navbar ---------- */
-export function Navbar({
-  page,
-  go,
-  soundEnabled,
-  onToggleSound,
-}: {
-  page: "home" | "play";
-  go: (p: "home" | "play") => void;
-  soundEnabled: boolean;
-  onToggleSound: () => void;
-}) {
+export function Navbar({ page, go }: { page: "home" | "play"; go: (p: "home" | "play") => void }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -205,7 +195,6 @@ export function Navbar({
   const links = [
     { label: "CARDS", jp: "カード", href: "#deck" },
     { label: "ELEMENTS", jp: "ぞくせい", href: "#elements" },
-    { label: "REVIEWS", jp: "こえ", href: "#reviews" },
     { label: "HOW TO PLAY", jp: "あそびかた", href: "#how" },
     { label: "PACKS", jp: "パック", href: "#packs" },
   ];
@@ -251,34 +240,12 @@ export function Navbar({
           ))}
         </div>
 
-        <div className="flex items-center gap-2 sm:gap-3">
-          {/* Sound Toggle Button */}
-          <button
-            onClick={onToggleSound}
-            className={cn(
-              "flex h-9 cursor-pointer items-center gap-1.5 rounded-lg border-2 border-[#111110] px-2.5 font-pixel text-[11px] tracking-wider shadow-[2px_2px_0_#111110] transition hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none",
-              soundEnabled
-                ? "bg-white text-[#111110] hover:bg-[#FFD900]"
-                : "bg-[#111110]/10 text-[#111110]/50 hover:bg-[#111110]/20"
-            )}
-            title={soundEnabled ? "Sound: ON (click to mute)" : "Sound: MUTED (click to enable)"}
-            aria-label={soundEnabled ? "Sound: ON (click to mute)" : "Sound: MUTED (click to enable)"}
-          >
-            {soundEnabled ? (
-              <Volume2 className="h-3.5 w-3.5 text-[#FF0B0B]" />
-            ) : (
-              <VolumeX className="h-3.5 w-3.5" />
-            )}
-            <span className="hidden md:inline font-bold">
-              {soundEnabled ? "SOUND: ON" : "MUTED"}
-            </span>
-          </button>
-
+        <div className="flex items-center gap-3">
           <button
             onClick={() => go("play")}
             data-cursor={page === "play" ? undefined : "go"}
             className={cn(
-              "hidden cursor-pointer items-center gap-2 border-[3px] border-[#111110] px-5 py-2 font-display text-sm shadow-[4px_4px_0_#111110] transition hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_#111110] sm:inline-flex",
+              "hidden cursor-pointer items-center gap-2 border-[3px] border-[#111110] px-5 py-2.5 font-display text-sm shadow-[4px_4px_0_#111110] transition hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_#111110] sm:inline-flex",
               page === "play" ? "bg-[#111110] text-white" : "bg-[#FF0B0B] text-white hover:bg-[#d60000]"
             )}
           >
@@ -289,7 +256,7 @@ export function Navbar({
 
           <button
             onClick={() => setOpen(!open)}
-            className="grid h-10 w-10 cursor-pointer place-items-center border-[2.5px] border-[#111110] bg-white shadow-[3px_3px_0_#111110] lg:hidden"
+            className="grid h-11 w-11 cursor-pointer place-items-center border-[3px] border-[#111110] bg-white shadow-[4px_4px_0_#111110] lg:hidden"
             aria-label="Menu"
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -310,19 +277,6 @@ export function Navbar({
               <span className="font-jp text-sm opacity-50">{l.jp} — 0{i + 1}</span>
             </a>
           ))}
-
-          <div className="mt-4 border-b-2 border-dashed border-[#111110]/20 pb-4">
-            <button
-              onClick={onToggleSound}
-              className={cn(
-                "flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg border-2 border-[#111110] py-2 font-pixel text-xs shadow-[2px_2px_0_#111110]",
-                soundEnabled ? "bg-white" : "bg-black/10 text-black/50"
-              )}
-            >
-              {soundEnabled ? <Volume2 className="h-4 w-4 text-[#FF0B0B]" /> : <VolumeX className="h-4 w-4" />}
-              <span>{soundEnabled ? "SOUND: ON" : "SOUND: MUTED"}</span>
-            </button>
-          </div>
 
           <button
             onClick={() => { setOpen(false); go("play"); }}

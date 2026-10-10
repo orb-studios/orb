@@ -53,24 +53,6 @@ import { sound } from "./utils/sound";
 
 export default function App() {
   const [page, setPage] = useState<"home" | "play">("home");
-  const [soundEnabled, setSoundEnabled] = useState(() => {
-    if (typeof window !== "undefined") {
-      const saved = localStorage.getItem("orb_sound");
-      return saved !== null ? saved === "true" : true;
-    }
-    return true;
-  });
-
-  const toggleSound = useCallback(() => {
-    setSoundEnabled((prev) => {
-      const next = !prev;
-      if (typeof window !== "undefined") {
-        localStorage.setItem("orb_sound", String(next));
-      }
-      sound.toggle(next);
-      return next;
-    });
-  }, []);
 
   const go = useCallback((p: "home" | "play") => {
     setPage(p);
@@ -84,12 +66,7 @@ export default function App() {
   return (
     <div key={page} className="min-h-screen bg-[#FFF7E8] text-[#111110]">
       <Cursor />
-      <Navbar
-        page={page}
-        go={go}
-        soundEnabled={soundEnabled}
-        onToggleSound={toggleSound}
-      />
+      <Navbar page={page} go={go} />
 
       <div className="animate-[pop-in_0.4s_ease-out]">
         {page === "home" ? <Landing go={go} /> : <Play go={go} />}

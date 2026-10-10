@@ -56,17 +56,23 @@ export const sound = {
     }
   },
 
+  isEnabled: (): boolean => isSoundEnabled(),
+
   // Toggle sound prompt (C5 -> E5 on, E5 -> A4 off)
-  toggle: (isOn: boolean) => {
+  toggle: (isOn?: boolean): boolean => {
+    const next = isOn !== undefined ? isOn : !isSoundEnabled();
+    if (typeof window !== "undefined") {
+      localStorage.setItem("orb_sound", String(next));
+    }
     try {
       const ctx = getContext();
-      if (!ctx) return;
+      if (!ctx) return next;
       const now = ctx.currentTime;
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
 
       osc.type = "sine";
-      if (isOn) {
+      if (next) {
         osc.frequency.setValueAtTime(523.25, now);
         osc.frequency.setValueAtTime(659.25, now + 0.07);
       } else {
@@ -83,6 +89,7 @@ export const sound = {
       osc.start(now);
       osc.stop(now + 0.22);
     } catch {}
+    return next;
   },
 
   // Ascending 4-note arcade fanfare for pack pulls

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Volume2, VolumeX } from "lucide-react";
 import { Package, Swords, TrendingUp, Sparkles, RotateCcw, Gamepad2, ArrowRight, MapPin, Github } from "./icons";
 import { CARDS, ELEMENT_META } from "../data/cards";
 import { ArcadeButton, JPBadge, Magnetic, Marquee, SectionHeader, Starburst } from "./ui";
@@ -270,6 +271,13 @@ export function FinalCTA({ go }: { go: (p: "home" | "play") => void }) {
 
 /* ================= FOOTER ================= */
 export function Footer({ go }: { go: (p: "home" | "play") => void }) {
+  const [soundOn, setSoundOn] = useState(() => sound.isEnabled());
+
+  const toggleAudio = () => {
+    const next = sound.toggle();
+    setSoundOn(next);
+  };
+
   return (
     <footer className="relative overflow-hidden border-t-[3.5px] border-[#111110] bg-[#FFFDF4]">
       <div className="mx-auto max-w-7xl px-4 pb-6 pt-14 md:px-8">
@@ -372,7 +380,18 @@ export function Footer({ go }: { go: (p: "home" | "play") => void }) {
         <div className="ticket-edge opacity-25" />
         <div className="flex flex-col items-center justify-between gap-3 py-5 font-pixel text-[10px] tracking-[0.2em] text-[#111110]/55 md:flex-row md:text-[11px]">
           <p>© 2026 ORB STUDIOS — ALL RIGHTS RESERVED ● 無断転載禁止</p>
-          <p className="flex items-center gap-2">HAND-CRAFTED WITH ♥ IN INDIA</p>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={toggleAudio}
+              className="flex cursor-pointer items-center gap-1.5 transition hover:text-[#FF0B0B]"
+              title={soundOn ? "Sound: ON (click to mute)" : "Sound: MUTED (click to enable)"}
+            >
+              {soundOn ? <Volume2 className="h-3.5 w-3.5 text-[#FF0B0B]" /> : <VolumeX className="h-3.5 w-3.5" />}
+              <span>{soundOn ? "SOUND: ON" : "SOUND: MUTED"}</span>
+            </button>
+            <span className="opacity-40">●</span>
+            <p>HAND-CRAFTED WITH ♥ IN INDIA</p>
+          </div>
         </div>
       </div>
     </footer>

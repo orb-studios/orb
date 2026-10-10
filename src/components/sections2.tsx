@@ -343,7 +343,7 @@ export function Footer({ go }: { go: (p: "home" | "play") => void }) {
             </span>
           </div>
           <p className="mt-2.5 text-xs leading-relaxed text-[#111110]/80">
-            This showcase website was built with AI code assistance as a temporary preview while the full game platform is in development.
+            This official website was built with AI code assistance while the full game platform is in active development.
             <strong className="text-[#FF0B0B]"> All card illustrations, creature designs, character artwork, and logos were 100% created by human artists (Art &amp; Character Design: Lakshya / ganu; Development &amp; Code: Anirudh / anonspud).</strong> No generative AI was used for any artwork, card assets, or brand identity.
           </p>
         </div>

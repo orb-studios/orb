@@ -100,7 +100,7 @@ export function Manifesto() {
             <div className="reveal flex items-center gap-3 rounded-xl border-[3.5px] border-dashed border-[#111110]/40 bg-[#FFD900]/30 px-5 py-4">
               <BadgeCheck className="h-5 w-5 shrink-0" />
               <p className="font-pixel text-xs tracking-[0.15em]">
-                16 CARDS REVEALED IN THIS PREVIEW — 45 IN THE FULL FIRST EDITION!
+                16 CARDS REVEALED SO FAR — 45 IN THE FULL FIRST EDITION!
               </p>
             </div>
           </div>

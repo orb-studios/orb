@@ -89,7 +89,7 @@ export function HowTo() {
 }
 
 /* ================= PACK OPENING ================= */
-export function Packs({ onCoin }: { onCoin: () => void }) {
+export function Packs() {
   const [pulled, setPulled] = useState<(typeof CARDS)[number] | null>(null);
   const [opening, setOpening] = useState(false);
   const [count, setCount] = useState(0);
@@ -111,7 +111,6 @@ export function Packs({ onCoin }: { onCoin: () => void }) {
       setCount((c) => c + 1);
       setOpening(false);
       sound.packOpen();
-      onCoin();
     }, 900);
   };
 

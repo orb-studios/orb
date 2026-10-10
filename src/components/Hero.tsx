@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
-import { Play, Layers, ChevronDown, Sparkles, Zap, Heart } from "lucide-react";
+import { Play, Layers, ChevronDown, Sparkles, Zap } from "lucide-react";
 import { CARDS } from "../data/cards";
 import { JPBadge, Magnetic, Marquee, OrbWordmark, SpinBadge, Starburst } from "./ui";
 import { TCGCard } from "./TCGCard";
 
-export function Hero({ go, onCoin }: { go: (p: "home" | "play") => void; onCoin: () => void }) {
+export function Hero({ go }: { go: (p: "home" | "play") => void }) {
   const root = useRef<HTMLDivElement>(null);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
 
@@ -158,12 +158,6 @@ export function Hero({ go, onCoin }: { go: (p: "home" | "play") => void; onCoin:
             <div className="animate-[float_4s_ease-in-out_infinite]">
               <TCGCard card={mid} tilt={false} className="[filter:drop-shadow(0_18px_24px_rgba(0,0,0,0.35))]" />
             </div>
-            <button
-              onClick={onCoin}
-              className="absolute -bottom-5 left-1/2 flex -translate-x-1/2 cursor-pointer items-center gap-2 whitespace-nowrap rounded-full border-[3px] border-[#111110] bg-[#111110] px-4 py-2 font-pixel text-[11px] tracking-[0.2em] text-[#FFD900] shadow-[4px_4px_0_rgba(0,0,0,0.4)] transition hover:scale-105"
-            >
-              <Heart className="h-3.5 w-3.5 fill-[#FF0B0B] text-[#FF0B0B]" /> +1 COIN — コインゲット
-            </button>
           </div>
 
           {/* floor shadow */}

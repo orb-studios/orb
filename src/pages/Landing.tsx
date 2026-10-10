@@ -3,16 +3,16 @@ import { Deck, Elements, Manifesto } from "../components/sections1";
 import { FinalCTA, Footer, HowTo, Packs } from "../components/sections2";
 import { useReveal } from "../hooks/useReveal";
 
-export function Landing({ go, onCoin }: { go: (p: "home" | "play") => void; onCoin: () => void }) {
+export function Landing({ go }: { go: (p: "home" | "play") => void }) {
   useReveal();
   return (
     <main>
-      <Hero go={go} onCoin={onCoin} />
+      <Hero go={go} />
       <Manifesto />
       <Elements />
       <Deck />
       <HowTo />
-      <Packs onCoin={onCoin} />
+      <Packs />
       <FinalCTA go={go} />
       <Footer go={go} />
     </main>

@@ -53,8 +53,6 @@ import { sound } from "./utils/sound";
 
 export default function App() {
   const [page, setPage] = useState<"home" | "play">("home");
-  const [credits, setCredits] = useState(3);
-  const [bursts, setBursts] = useState<{ id: number; x: number; y: number }[]>([]);
   const [soundEnabled, setSoundEnabled] = useState(() => {
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem("orb_sound");
@@ -79,26 +77,8 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
   }, []);
 
-  const addCoin = useCallback((e?: { clientX: number; clientY: number }) => {
-    setCredits((c) => Math.min(c + 1, 99));
-    sound.coin(soundEnabled);
-    if (e) {
-      const id = Date.now() + Math.random();
-      setBursts((b) => [...b.slice(-5), { id, x: e.clientX, y: e.clientY }]);
-      setTimeout(() => setBursts((b) => b.filter((x) => x.id !== id)), 900);
-    }
-  }, [soundEnabled]);
-
-  const handleCoinClick = useCallback(
-    (ev: React.MouseEvent | undefined) => {
-      if (ev && "clientX" in ev) addCoin({ clientX: ev.clientX, clientY: ev.clientY });
-      else addCoin();
-    },
-    [addCoin]
-  );
-
   useEffect(() => {
-    document.title = page === "play" ? "orb — insert coin (coming soon)" : "orb — indie arcade TCG by Orb Studios";
+    document.title = page === "play" ? "orb — game cabinet (coming soon)" : "orb — indie arcade TCG by Orb Studios";
   }, [page]);
 
   return (
@@ -107,35 +87,13 @@ export default function App() {
       <Navbar
         page={page}
         go={go}
-        credits={credits}
-        onCoin={() => addCoin()}
         soundEnabled={soundEnabled}
         onToggleSound={toggleSound}
       />
 
       <div className="animate-[pop-in_0.4s_ease-out]">
-        {page === "home" ? (
-          <Landing go={go} onCoin={() => addCoin()} />
-        ) : (
-          <Play go={go} credits={credits} />
-        )}
+        {page === "home" ? <Landing go={go} /> : <Play go={go} />}
       </div>
-
-      {/* coin burst particles */}
-      {bursts.map((b) => (
-        <div
-          key={b.id}
-          className="pointer-events-none fixed z-[210] -translate-x-1/2 -translate-y-1/2 animate-[pop-in_0.3s_ease-out]"
-          style={{ left: b.x, top: b.y }}
-        >
-          <span className="grid h-12 w-12 place-items-center rounded-full border-[3px] border-[#111110] bg-[#FFD900] font-display text-lg shadow-[3px_3px_0_#111110]">
-            +1
-          </span>
-        </div>
-      ))}
-
-      {/* hidden a11y */}
-      <button className="sr-only" onClick={(e) => handleCoinClick(e)}>add coin</button>
     </div>
   );
 }

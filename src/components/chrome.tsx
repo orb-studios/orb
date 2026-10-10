@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Gamepad2, Menu, X, Coins, Volume2, VolumeX } from "lucide-react";
+import { Gamepad2, Menu, X, Volume2, VolumeX } from "lucide-react";
 import { cn } from "../utils/cn";
 
 /* ---------- custom cursor ---------- */
@@ -185,15 +185,11 @@ export function Cursor() {
 export function Navbar({
   page,
   go,
-  credits,
-  onCoin,
   soundEnabled,
   onToggleSound,
 }: {
   page: "home" | "play";
   go: (p: "home" | "play") => void;
-  credits: number;
-  onCoin: () => void;
   soundEnabled: boolean;
   onToggleSound: () => void;
 }) {
@@ -255,16 +251,6 @@ export function Navbar({
         </div>
 
         <div className="flex items-center gap-2 sm:gap-3">
-          {/* Coins button */}
-          <button
-            onClick={onCoin}
-            className="group flex cursor-pointer items-center gap-1.5 rounded-full border-2 border-[#111110] bg-[#FFD900] px-2.5 py-1 font-pixel text-[11px] tracking-wider shadow-[2px_2px_0_#111110] transition hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none sm:px-3 sm:text-xs"
-            title="Insert Coin"
-          >
-            <Coins className="h-3.5 w-3.5 transition group-hover:animate-wiggle" />
-            <span>{String(credits).padStart(2, "0")} COINS</span>
-          </button>
-
           {/* Sound Toggle Button */}
           <button
             onClick={onToggleSound}
@@ -324,18 +310,11 @@ export function Navbar({
             </a>
           ))}
 
-          <div className="mt-4 flex items-center justify-between gap-3 border-b-2 border-dashed border-[#111110]/20 pb-4">
-            <button
-              onClick={onCoin}
-              className="flex cursor-pointer items-center gap-1.5 rounded-full border-2 border-[#111110] bg-[#FFD900] px-3.5 py-1.5 font-pixel text-xs shadow-[2px_2px_0_#111110]"
-            >
-              <Coins className="h-4 w-4" />
-              <span>{String(credits).padStart(2, "0")} COINS</span>
-            </button>
+          <div className="mt-4 border-b-2 border-dashed border-[#111110]/20 pb-4">
             <button
               onClick={onToggleSound}
               className={cn(
-                "flex cursor-pointer items-center gap-2 rounded-lg border-2 border-[#111110] px-3 py-1.5 font-pixel text-xs shadow-[2px_2px_0_#111110]",
+                "flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg border-2 border-[#111110] py-2 font-pixel text-xs shadow-[2px_2px_0_#111110]",
                 soundEnabled ? "bg-white" : "bg-black/10 text-black/50"
               )}
             >

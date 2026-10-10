@@ -3,7 +3,7 @@ import { ArrowLeft, Construction, Gamepad2, Lock, Wrench } from "lucide-react";
 import { JPBadge, Magnetic } from "../components/ui";
 import { useReveal } from "../hooks/useReveal";
 
-export function Play({ go, credits }: { go: (p: "home" | "play") => void; credits: number }) {
+export function Play({ go }: { go: (p: "home" | "play") => void }) {
   useReveal();
   const [dots, setDots] = useState("");
 
@@ -28,7 +28,7 @@ export function Play({ go, credits }: { go: (p: "home" | "play") => void; credit
           <div className="flex items-center justify-between border-b-[3px] border-white/20 bg-black/40 px-5 py-3">
             <p className="font-pixel text-xs tracking-[0.3em] text-white/70">ORB ARCADE ● PLAYER 1</p>
             <p className="flex items-center gap-2 font-pixel text-xs tracking-[0.2em] text-[#FFD900]">
-              <span className="h-2.5 w-2.5 animate-blink rounded-full bg-[#FF0B0B]" /> CREDIT {String(credits).padStart(2, "0")}
+              <span className="h-2.5 w-2.5 animate-blink rounded-full bg-[#2fbf4a]" /> STATUS: IN ACTIVE DEV
             </p>
           </div>
           <div className="relative px-6 py-14 md:py-20">

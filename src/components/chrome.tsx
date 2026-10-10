@@ -207,14 +207,12 @@ export function Navbar({ page, go }: { page: "home" | "play"; go: (p: "home" | "
       )}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 md:px-8">
-        <button onClick={() => go("home")} className="group flex cursor-pointer items-center gap-2.5">
-          <span className="transition group-hover:scale-105">
-            <img
-              src="/brand/logo.jpg"
-              alt="Orb Studios Logo"
-              className="h-10 w-10 rounded-full border-[2.5px] border-[#111110] object-cover shadow-[2px_2px_0_#111110]"
-            />
-          </span>
+        <button onClick={() => go("home")} className="flex cursor-pointer items-center gap-2.5">
+          <img
+            src="/brand/logo.jpg"
+            alt="Orb Studios Logo"
+            className="h-10 w-10 rounded-full border-[2.5px] border-[#111110] object-cover shadow-[2px_2px_0_#111110]"
+          />
           <span className="text-left leading-none">
             <span className="block font-display text-2xl tracking-tight">orb</span>
             <span className="block font-pixel text-[9px] tracking-[0.3em] opacity-60">ORB STUDIOS</span>

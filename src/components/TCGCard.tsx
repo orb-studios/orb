@@ -57,7 +57,7 @@ export function TCGCard({
     >
       {/* Outer frame showcasing authentic full card */}
       <div
-        className="relative aspect-[614/889] w-full overflow-hidden rounded-[12px] border-[4px] border-[#111110] bg-[#111110] shadow-[8px_8px_0_#111110] transition-shadow duration-200 group-hover:shadow-[12px_12px_0_#111110]"
+        className="relative aspect-[614/889] w-full overflow-hidden rounded-[12px] border-[4px] border-[#111110] bg-[#111110] shadow-[8px_8px_0_#111110] transition-all duration-300 ease-out group-hover:scale-[1.04] group-hover:shadow-[12px_12px_0_#111110]"
         style={{ borderColor: "#111110" }}
       >
         {/* Authentic hand-drawn card image */}
@@ -65,7 +65,7 @@ export function TCGCard({
           src={card.art}
           alt={card.name}
           loading="lazy"
-          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+          className="h-full w-full object-cover"
           draggable={false}
         />
 
@@ -76,33 +76,12 @@ export function TCGCard({
         />
         <div className="card-glare" />
 
-        {/* Rarity badge */}
-        <div
-          className={cn(
-            "absolute left-2.5 top-2.5 rounded-full border-2 border-[#111110] px-2.5 py-0.5 font-pixel text-[10px] tracking-[0.15em] shadow-[2px_2px_0_#111110]",
-            card.rarity === "SECRET" && "bg-[#8B5CF6] text-white",
-            card.rarity === "LEGENDARY" && "bg-[#FFD900] text-[#111110]",
-            card.rarity === "EPIC" && "bg-[#EC4899] text-white",
-            card.rarity === "COMMON" && "bg-[#8B5A2B] text-white"
-          )}
-        >
-          {card.rarity}
-        </div>
-
-        {/* Subtle Element pip in top right */}
-        <div
-          className="absolute right-2.5 top-2.5 grid h-7 w-7 place-items-center rounded-full border-2 border-[#111110] text-white shadow-[2px_2px_0_#111110]"
-          style={{ background: meta.color }}
-          title={`${card.element} — ${meta.jp}`}
-        >
-          <ElementIcon element={card.element} className="h-3.5 w-3.5" />
-        </div>
-
-        {/* Bottom hover bar prompt */}
-        <div className="absolute inset-x-0 bottom-0 flex items-center justify-between border-t-2 border-[#111110] bg-[#111110]/90 px-3 py-1 text-white opacity-0 backdrop-blur-xs transition-opacity duration-200 group-hover:opacity-100">
-          <span className="font-pixel text-[10px] tracking-[0.2em] text-[#FFD900]">CLICK FOR INTEL</span>
-          <span className="font-pixel text-[10px] tracking-widest text-white/70">GANU</span>
-        </div>
+        {/* Bottom hover bar prompt (only when card has click action) */}
+        {onSelect && (
+          <div className="absolute inset-x-0 bottom-0 flex items-center justify-center border-t-2 border-[#111110] bg-[#111110]/90 px-3 py-1 text-white opacity-0 backdrop-blur-xs transition-opacity duration-200 group-hover:opacity-100">
+            <span className="font-pixel text-[10px] tracking-[0.2em] text-[#FFD900]">CLICK FOR INTEL</span>
+          </div>
+        )}
       </div>
     </div>
   );

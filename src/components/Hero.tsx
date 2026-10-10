@@ -121,7 +121,7 @@ export function Hero({ go }: { go: (p: "home" | "play") => void }) {
 
         {/* RIGHT — floating card fan */}
         <div className="relative mx-auto h-[480px] w-full max-w-[520px] sm:h-[560px] lg:h-[620px]">
-          {/* rotating badge */}
+          {/* rotating badge (under cards) */}
           <SpinBadge
             text="オーブ ● HAND-DRAWN ● ARCADE TCG ● オーブ ● "
             center={
@@ -129,23 +129,27 @@ export function Hero({ go }: { go: (p: "home" | "play") => void }) {
                 魂
               </span>
             }
-            className="absolute -top-2 right-2 z-30 h-32 w-32 text-white [filter:drop-shadow(3px_3px_0_#111110)] md:h-36 md:w-36"
+            className="absolute -top-3 right-0 z-0 h-32 w-32 text-white [filter:drop-shadow(3px_3px_0_#111110)] md:h-36 md:w-36"
           />
-          <Starburst color="#FFD900" className="absolute -left-2 top-6 z-30 h-28 w-28 animate-float text-[13px] md:h-32 md:w-32">
+          {/* starburst badge (under cards, separated from card) */}
+          <Starburst
+            color="#FFD900"
+            className="absolute -top-3 -left-3 z-0 h-28 w-28 animate-float text-[13px] md:h-32 md:w-32"
+          >
             STARTER<br />DECK 01<br />決定版!
           </Starburst>
 
           {/* cards */}
           <div
-            className="absolute left-0 top-16 w-[46%] animate-float"
+            className="absolute left-0 top-16 z-10 w-[46%] animate-float"
             style={{ ["--fl-rot" as string]: "-10deg" } as CSSProperties}
           >
             <div className="rotate-[-10deg]"><TCGCard card={left} tilt={false} /></div>
           </div>
-          <div className="absolute right-0 top-24 w-[46%] animate-float-delayed">
+          <div className="absolute right-0 top-24 z-10 w-[46%] animate-float-delayed">
             <div className="rotate-[9deg]"><TCGCard card={right} tilt={false} /></div>
           </div>
-          <div className="absolute left-1/2 top-40 z-10 w-[52%] -translate-x-1/2">
+          <div className="absolute left-1/2 top-40 z-20 w-[52%] -translate-x-1/2">
             <div className="animate-[float_4s_ease-in-out_infinite]">
               <TCGCard card={mid} tilt={false} className="[filter:drop-shadow(0_18px_24px_rgba(0,0,0,0.35))]" />
             </div>

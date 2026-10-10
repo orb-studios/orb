@@ -4,6 +4,7 @@ import { CARDS, ELEMENT_META } from "../data/cards";
 import { ArcadeButton, JPBadge, Magnetic, Marquee, SectionHeader, Starburst } from "./ui";
 import { ElementIcon, TCGCard } from "./TCGCard";
 import { cn } from "../utils/cn";
+import { sound } from "../utils/sound";
 
 /* ================= HOW TO PLAY ================= */
 export function HowTo() {
@@ -109,6 +110,7 @@ export function Packs({ onCoin }: { onCoin: () => void }) {
       setPulled(pick);
       setCount((c) => c + 1);
       setOpening(false);
+      sound.packOpen();
       onCoin();
     }, 900);
   };

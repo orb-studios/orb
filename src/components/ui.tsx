@@ -214,11 +214,13 @@ export function ArcadeButton({
   onClick,
   variant = "red",
   className,
+  ...rest
 }: {
   children: ReactNode;
   onClick?: () => void;
   variant?: "red" | "black" | "white" | "yellow";
   className?: string;
+  [key: string]: any;
 }) {
   const styles = {
     red: "bg-[#FF0B0B] text-white hover:bg-[#d60000]",
@@ -229,6 +231,7 @@ export function ArcadeButton({
   return (
     <button
       onClick={onClick}
+      {...rest}
       className={cn(
         "group relative inline-flex cursor-pointer items-center gap-3 overflow-hidden border-[3.5px] border-[#111110] px-7 py-4 font-display text-base tracking-wide shadow-[6px_6px_0_#111110] transition-all duration-150 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[3px_3px_0_#111110] active:translate-x-[5px] active:translate-y-[5px] active:shadow-none md:text-lg",
         styles[variant],

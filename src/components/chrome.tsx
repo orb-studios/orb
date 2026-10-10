@@ -8,6 +8,7 @@ export function Cursor() {
   const ringRef = useRef<HTMLDivElement>(null);
 
   const [hover, setHover] = useState(false);
+  const [hoverGo, setHoverGo] = useState(false);
   const [bgMode, setBgMode] = useState<"red" | "dark" | "yellow" | "light">("light");
   const [visible, setVisible] = useState(false);
 
@@ -56,8 +57,11 @@ export function Cursor() {
 
       const t = e.target as HTMLElement | null;
       if (t) {
-        const isInteractive = !!t.closest("a, button, [role='button'], input, .cursor-pointer");
+        const interactiveEl = t.closest("a, button, [role='button'], input, .cursor-pointer") as HTMLElement | null;
+        const isInteractive = !!interactiveEl;
+        const isGo = isInteractive && !!t.closest('[data-cursor="go"], .cursor-go');
         setHover(isInteractive);
+        setHoverGo(isGo);
         setBgMode(getBgMode(t));
       }
     };
@@ -119,22 +123,29 @@ export function Cursor() {
       ? "bg-[#FF0B0B] border-[#111110]" // on yellow background: orb red dot
       : "bg-[#FF0B0B] border-[#111110]"; // on cream/white: orb red dot
 
-  const ringThemeClass =
-    bgMode === "red"
-      ? hover
-        ? "h-14 w-14 border-[#111110] bg-[#FFD900] text-[#111110] shadow-[3px_3px_0_#111110]"
-        : "h-9 w-9 border-white bg-white/35"
-      : bgMode === "dark"
-      ? hover
-        ? "h-14 w-14 border-[#FFD900] bg-[#FFD900] text-[#111110] shadow-[3px_3px_0_#111110]"
-        : "h-9 w-9 border-white/70 bg-white/20"
-      : bgMode === "yellow"
-      ? hover
-        ? "h-14 w-14 border-[#111110] bg-[#111110] text-[#FFD900] shadow-[3px_3px_0_#111110]"
-        : "h-9 w-9 border-[#111110]/60 bg-[#111110]/15"
-      : hover
+  const ringThemeClass = hoverGo
+    ? bgMode === "red"
       ? "h-14 w-14 border-[#111110] bg-[#FFD900] text-[#111110] shadow-[3px_3px_0_#111110]"
-      : "h-9 w-9 border-[#111110]/60 bg-[#111110]/10";
+      : bgMode === "dark"
+      ? "h-14 w-14 border-[#FFD900] bg-[#FFD900] text-[#111110] shadow-[3px_3px_0_#111110]"
+      : bgMode === "yellow"
+      ? "h-14 w-14 border-[#111110] bg-[#111110] text-[#FFD900] shadow-[3px_3px_0_#111110]"
+      : "h-14 w-14 border-[#111110] bg-[#FFD900] text-[#111110] shadow-[3px_3px_0_#111110]"
+    : hover
+    ? bgMode === "red"
+      ? "h-11 w-11 border-white bg-white/25"
+      : bgMode === "dark"
+      ? "h-11 w-11 border-white/80 bg-white/15"
+      : bgMode === "yellow"
+      ? "h-11 w-11 border-[#111110]/70 bg-[#111110]/15"
+      : "h-11 w-11 border-[#111110]/70 bg-[#111110]/10"
+    : bgMode === "red"
+    ? "h-9 w-9 border-white bg-white/35"
+    : bgMode === "dark"
+    ? "h-9 w-9 border-white/70 bg-white/20"
+    : bgMode === "yellow"
+    ? "h-9 w-9 border-[#111110]/60 bg-[#111110]/15"
+    : "h-9 w-9 border-[#111110]/60 bg-[#111110]/10";
 
   return (
     <div className="pointer-events-none fixed inset-0 z-[200] hidden [@media(pointer:fine)]:block" aria-hidden>
@@ -142,8 +153,9 @@ export function Cursor() {
       <div
         ref={dotRef}
         className={cn(
-          "absolute left-0 top-0 h-3.5 w-3.5 rounded-full border-2 transition-[background-color,border-color] duration-150 ease-out",
-          dotColorClass
+          "absolute left-0 top-0 h-3.5 w-3.5 rounded-full border-2 transition-[opacity,background-color,border-color] duration-150 ease-out",
+          dotColorClass,
+          hoverGo ? "opacity-0" : "opacity-100"
         )}
       />
       {/* Magnetic follower ring */}
@@ -154,10 +166,10 @@ export function Cursor() {
           ringThemeClass
         )}
       >
-        {hover && (
+        {hoverGo && (
           <span
             className={cn(
-              "font-display text-[10px] font-bold tracking-widest leading-none",
+              "font-display text-[10px] font-bold tracking-widest leading-none select-none",
               bgMode === "yellow" ? "text-[#FFD900]" : "text-[#111110]"
             )}
           >
@@ -256,6 +268,7 @@ export function Navbar({ page, go }: { page: "home" | "play"; go: (p: "home" | "
         <div className="flex items-center gap-3">
           <button
             onClick={() => go("play")}
+            data-cursor={page === "play" ? undefined : "go"}
             className={cn(
               "hidden cursor-pointer items-center gap-2 border-[3px] border-[#111110] px-5 py-2.5 font-display text-sm shadow-[4px_4px_0_#111110] transition hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_#111110] sm:inline-flex",
               page === "play" ? "bg-[#111110] text-white" : "bg-[#FF0B0B] text-white hover:bg-[#d60000]"
@@ -290,6 +303,7 @@ export function Navbar({ page, go }: { page: "home" | "play"; go: (p: "home" | "
           ))}
           <button
             onClick={() => { setOpen(false); go("play"); }}
+            data-cursor="go"
             className="mt-4 flex w-full cursor-pointer items-center justify-center gap-2 border-[3px] border-[#111110] bg-[#FF0B0B] px-5 py-3.5 font-display text-base text-white shadow-[4px_4px_0_#111110]"
           >
             <Gamepad2 className="h-5 w-5" /> PLAY NOW — プレイ

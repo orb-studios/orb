@@ -167,7 +167,7 @@ export function Packs({ onCoin }: { onCoin: () => void }) {
             </div>
             <div className="mt-6 flex justify-center">
               <Magnetic>
-                <ArcadeButton variant="yellow" onClick={pull}>
+                <ArcadeButton variant="yellow" data-cursor="go" onClick={pull}>
                   {opening ? "OPENING…" : "PULL A CARD — ひく!"}
                 </ArcadeButton>
               </Magnetic>
@@ -251,6 +251,7 @@ export function FinalCTA({ go }: { go: (p: "home" | "play") => void }) {
           <Magnetic strength={24}>
             <button
               onClick={() => go("play")}
+              data-cursor="go"
               className="group inline-flex cursor-pointer items-center gap-3 border-4 border-white bg-[#FF0B0B] px-10 py-5 font-display text-xl shadow-[8px_8px_0_white] transition hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-[4px_4px_0_white] md:text-2xl"
             >
               <Gamepad2 className="h-7 w-7 transition group-hover:animate-wiggle" />

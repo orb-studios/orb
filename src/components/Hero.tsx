@@ -85,6 +85,7 @@ export function Hero({ go, onCoin }: { go: (p: "home" | "play") => void; onCoin:
             <Magnetic>
               <button
                 onClick={() => go("play")}
+                data-cursor="go"
                 className="group relative inline-flex cursor-pointer items-center gap-3 overflow-hidden border-4 border-[#111110] bg-[#111110] px-8 py-4 font-display text-lg text-white shadow-[7px_7px_0_rgba(0,0,0,0.35)] transition hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0_rgba(0,0,0,0.35)]"
               >
                 <span className="card-glare" />

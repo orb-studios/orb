@@ -62,11 +62,8 @@ export function Hero({ go }: { go: (p: "home" | "play") => void }) {
             <JPBadge jp="手描き" en="HAND-DRAWN" bg="#FFD900" />
           </div>
 
-          <div
-            className="relative mx-auto mt-4 max-w-[560px] lg:mx-0"
-            style={{ transform: `translate(${tilt.x * -14}px, ${tilt.y * -10}px)` }}
-          >
-            <OrbWordmark className="w-full" />
+          <div className="relative mx-auto mt-4 max-w-[560px] lg:mx-0">
+            <OrbWordmark className="w-full" tilt={tilt} />
             {/* sparkles */}
             <Sparkles className="absolute -left-4 top-2 h-8 w-8 animate-float text-[#FFD900] drop-shadow-[2px_2px_0_#111110]" style={{ ["--fl-rot" as string]: "-12deg" }} />
             <Zap className="absolute -right-2 top-10 h-7 w-7 animate-float-delayed fill-[#FFD900] text-[#111110]" />
@@ -141,20 +138,14 @@ export function Hero({ go }: { go: (p: "home" | "play") => void }) {
           {/* cards */}
           <div
             className="absolute left-0 top-16 w-[46%] animate-float"
-            style={{ ["--fl-rot" as string]: "-10deg", transform: `translate(${tilt.x * 22}px, ${tilt.y * 16}px) rotate(-10deg)` } as CSSProperties}
+            style={{ ["--fl-rot" as string]: "-10deg" } as CSSProperties}
           >
             <div className="rotate-[-10deg]"><TCGCard card={left} tilt={false} /></div>
           </div>
-          <div
-            className="absolute right-0 top-24 w-[46%] animate-float-delayed"
-            style={{ transform: `translate(${tilt.x * -22}px, ${tilt.y * -12}px)` } as CSSProperties}
-          >
+          <div className="absolute right-0 top-24 w-[46%] animate-float-delayed">
             <div className="rotate-[9deg]"><TCGCard card={right} tilt={false} /></div>
           </div>
-          <div
-            className="absolute left-1/2 top-40 z-10 w-[52%] -translate-x-1/2"
-            style={{ transform: `translate(calc(-50% + ${tilt.x * 10}px), ${tilt.y * 8}px)` }}
-          >
+          <div className="absolute left-1/2 top-40 z-10 w-[52%] -translate-x-1/2">
             <div className="animate-[float_4s_ease-in-out_infinite]">
               <TCGCard card={mid} tilt={false} className="[filter:drop-shadow(0_18px_24px_rgba(0,0,0,0.35))]" />
             </div>

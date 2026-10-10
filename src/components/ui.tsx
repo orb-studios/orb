@@ -2,15 +2,23 @@ import { useEffect, useRef, type ReactNode } from "react";
 import { cn } from "../utils/cn";
 
 /* ---------- ORB bubble wordmark (sticker style, Titan One + ink outline) ---------- */
-export function OrbWordmark({ className }: { className?: string }) {
+export function OrbWordmark({
+  className,
+  tilt,
+}: {
+  className?: string;
+  tilt?: { x: number; y: number };
+}) {
   return (
     <div className={cn("relative select-none", className)} role="img" aria-label="orb">
-      <p className="orb-bubble text-center text-[7rem] leading-[0.9] tracking-tight sm:text-[9rem] lg:text-left lg:text-[10.5rem]">
-        orb
-      </p>
-      {/* shine dots */}
-      <span className="absolute left-[6%] top-[16%] h-4 w-4 rounded-full bg-white/95" aria-hidden />
-      <span className="absolute left-[13%] top-[10%] h-2.5 w-2.5 rounded-full bg-white/80" aria-hidden />
+      <div style={tilt ? { transform: `translate(${tilt.x * -14}px, ${tilt.y * -10}px)` } : undefined}>
+        <p className="orb-bubble text-center text-[7rem] leading-[0.9] tracking-tight sm:text-[9rem] lg:text-left lg:text-[10.5rem]">
+          orb
+        </p>
+        {/* shine dots */}
+        <span className="absolute left-[6%] top-[16%] h-4 w-4 rounded-full bg-white/95" aria-hidden />
+        <span className="absolute left-[13%] top-[10%] h-2.5 w-2.5 rounded-full bg-white/80" aria-hidden />
+      </div>
       <span className="absolute bottom-[18%] right-[10%] hidden rounded-full border-[3px] border-[#111110] bg-[#FFD900] px-3 py-1 font-display text-sm shadow-[3px_3px_0_#111110] sm:block" aria-hidden>
         オーブ
       </span>

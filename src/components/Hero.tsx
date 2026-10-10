@@ -166,7 +166,7 @@ export function Hero({ go }: { go: (p: "home" | "play") => void }) {
       </div>
 
       {/* bottom insert-coin strip */}
-      <div className="relative z-20 border-t-[3.5px] border-[#111110] bg-[#111110] py-3 text-white">
+      <div className="relative z-20 border-y-[3.5px] border-[#111110] bg-[#111110] py-4 text-white">
         <Marquee>
           {Array.from({ length: 8 }).map((_, i) => (
             <span key={i} className="flex items-center gap-6 pr-6 font-pixel text-sm tracking-[0.3em]">
@@ -180,7 +180,7 @@ export function Hero({ go }: { go: (p: "home" | "play") => void }) {
         </Marquee>
         <a
           href="#manifesto"
-          className="absolute left-1/2 top-1/2 z-30 hidden -translate-x-1/2 -translate-y-1/2 items-center gap-2 rounded-full border-[3px] border-white bg-[#FF0B0B] px-5 py-2 font-display text-sm shadow-[4px_4px_0_rgba(255,255,255,0.35)] transition hover:scale-105 md:inline-flex"
+          className="absolute left-1/2 top-1/2 z-30 hidden -translate-x-1/2 -translate-y-1/2 items-center gap-2 rounded-full border-[3px] border-white bg-[#FF0B0B] px-5 py-2 font-display text-sm shadow-[3px_3px_0_rgba(255,255,255,0.35)] transition hover:scale-105 md:inline-flex"
         >
           SCROLL <ChevronDown className="h-4 w-4 animate-bounce-soft" />
         </a>

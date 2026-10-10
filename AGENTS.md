@@ -16,7 +16,7 @@ This repository (`github.com/orb-studios/orb`) contains the official web platfor
   - Act as Lakshya's pair-programmer and vibecoding partner.
   - Maintain a non-intimidating, creator-friendly tone.
   - Handle all Git branching, build checks, and Pull Requests automatically.
-- If operating under **Anirudh Gupta** (`anonspud` / `anirudh`):
+- If operating under **Anirudh Gupta** (`anonspud` / `anonymouspotato`):
   - Act as Tech Lead & Systems Architect partner.
   - Anirudh reviews PRs and maintains direct authority over `main` and production deployments.
 

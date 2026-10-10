@@ -80,10 +80,10 @@ export function TCGCard({
         <div
           className={cn(
             "absolute left-2.5 top-2.5 rounded-full border-2 border-[#111110] px-2.5 py-0.5 font-pixel text-[10px] tracking-[0.15em] shadow-[2px_2px_0_#111110]",
-            card.rarity === "LEGEND" && "bg-[#FFD900] text-[#111110]",
-            card.rarity === "EPIC" && "bg-[#c084fc] text-white",
-            card.rarity === "RARE" && "bg-white text-[#111110]",
-            card.rarity === "COMMON" && "bg-[#FFF7E8] text-[#111110]"
+            card.rarity === "SECRET" && "bg-[#8B5CF6] text-white",
+            card.rarity === "LEGENDARY" && "bg-[#FFD900] text-[#111110]",
+            card.rarity === "EPIC" && "bg-[#EC4899] text-white",
+            card.rarity === "COMMON" && "bg-[#8B5A2B] text-white"
           )}
         >
           {card.rarity}
@@ -148,8 +148,19 @@ export function CardModal({ card, onClose }: { card: OrbCard | null; onClose: ()
             <span className="rounded-full border-[3px] border-[#111110] bg-[#FFD900] px-3 py-1 font-pixel text-[11px] tracking-widest">
               No.{card.num}/{card.total}
             </span>
+            <span
+              className={cn(
+                "rounded-full border-2 border-[#111110] px-2.5 py-0.5 font-pixel text-[10px] tracking-widest font-bold",
+                card.rarity === "SECRET" && "bg-[#8B5CF6] text-white",
+                card.rarity === "LEGENDARY" && "bg-[#FFD900] text-[#111110]",
+                card.rarity === "EPIC" && "bg-[#EC4899] text-white",
+                card.rarity === "COMMON" && "bg-[#8B5A2B] text-white"
+              )}
+            >
+              {card.rarity} ({card.ribbon} Ribbon)
+            </span>
             <span className="rounded-full border-2 border-[#111110] bg-white px-2.5 py-0.5 font-pixel text-[10px] tracking-widest font-bold text-[#111110]">
-              {card.rarity}
+              DRAWN: {card.drawOrder}
             </span>
           </div>
 
@@ -174,8 +185,9 @@ export function CardModal({ card, onClose }: { card: OrbCard | null; onClose: ()
           {/* Stat bars */}
           <div className="space-y-2.5">
             {[
-              { label: "HP", icon: Heart, val: card.hp, color: "#FF0B0B" },
-              { label: "ATK", icon: Zap, val: card.atk, color: "#FF8A00" },
+              { label: "HP", icon: Heart, val: card.hp, maxVal: max, color: "#FF0B0B" },
+              { label: "DMG", icon: Zap, val: card.atk, maxVal: max, color: "#FF8A00" },
+              { label: "BST", icon: Sparkles, val: card.bst, maxVal: 750, color: "#10B981" },
             ].map((s) => (
               <div key={s.label} className="flex items-center gap-3">
                 <span className="flex w-14 items-center gap-1 font-display text-sm">
@@ -184,10 +196,10 @@ export function CardModal({ card, onClose }: { card: OrbCard | null; onClose: ()
                 <div className="h-4 flex-1 overflow-hidden rounded-full border-2 border-[#111110] bg-[#111110]/10">
                   <div
                     className="h-full rounded-full border-r-2 border-[#111110]"
-                    style={{ width: `${Math.min((s.val / max) * 100, 100)}%`, background: s.color }}
+                    style={{ width: `${Math.min((s.val / s.maxVal) * 100, 100)}%`, background: s.color }}
                   />
                 </div>
-                <span className="w-10 text-right font-display text-sm">{s.val}</span>
+                <span className="w-12 text-right font-display text-sm font-bold">{s.val}</span>
               </div>
             ))}
           </div>

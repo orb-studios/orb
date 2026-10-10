@@ -98,7 +98,7 @@ export function Packs({ onCoin }: { onCoin: () => void }) {
     setOpening(true);
     setPulled(null);
     setTimeout(() => {
-      const weights = CARDS.map((c) => (c.rarity === "LEGEND" ? 1 : c.rarity === "EPIC" ? 2 : 4));
+      const weights = CARDS.map((c) => (c.rarity === "SECRET" ? 0.5 : c.rarity === "LEGENDARY" ? 1 : c.rarity === "EPIC" ? 2.5 : 5));
       const total = weights.reduce((a, b) => a + b, 0);
       let r = Math.random() * total;
       let pick = CARDS[0];

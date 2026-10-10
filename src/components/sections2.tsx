@@ -315,8 +315,14 @@ export function Footer({ go }: { go: (p: "home" | "play") => void }) {
           <div>
             <p className="font-display text-sm tracking-wide">GAME <span className="font-jp text-xs opacity-50">ゲーム</span></p>
             <ul className="mt-3 space-y-2 text-sm text-[#111110]/70">
-              {["Starter deck", "Elements", "How to play", "Booster packs"].map((l) => (
-                <li key={l}><a href="#deck" className="transition hover:text-[#FF0B0B] hover:underline">{l}</a></li>
+              {[
+                { name: "Starter deck", href: "#deck" },
+                { name: "Elements", href: "#elements" },
+                { name: "Player reviews", href: "#reviews" },
+                { name: "How to play", href: "#how" },
+                { name: "Booster packs", href: "#packs" },
+              ].map((l) => (
+                <li key={l.name}><a href={l.href} className="transition hover:text-[#FF0B0B] hover:underline">{l.name}</a></li>
               ))}
             </ul>
           </div>

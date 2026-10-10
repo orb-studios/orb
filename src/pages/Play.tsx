@@ -71,7 +71,7 @@ export function Play({ go, credits }: { go: (p: "home" | "play") => void; credit
             <Wrench className="h-5 w-5" /> BUILD LOG
           </p>
           <ul className="mt-3 space-y-2 font-pixel text-xs tracking-[0.15em] text-white/70">
-            <li>[DONE] SHOWCASE PREVIEW SITE</li>
+            <li>[DONE] OFFICIAL SHOWCASE LAUNCH</li>
             <li>[DONE] 16 CREATURE CARDS REVEALED (45 IN TOTAL SET)</li>
             <li className="text-white">[WIP] DUEL ENGINE — PROTOTYPING{dots}</li>
             <li className="opacity-50">[TODO] ONLINE DUELS — IN DEVELOPMENT</li>

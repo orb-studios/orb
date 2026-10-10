@@ -9,7 +9,6 @@ export function Cursor() {
 
   const [hover, setHover] = useState(false);
   const [bgMode, setBgMode] = useState<"red" | "dark" | "yellow" | "light">("light");
-  const [clicking, setClicking] = useState(false);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -20,6 +19,7 @@ export function Cursor() {
     let ringX = -100;
     let ringY = -100;
     let initialized = false;
+    let isMouseDown = false;
     let raf: number;
 
     const getBgMode = (el: HTMLElement | null): "red" | "dark" | "yellow" | "light" => {
@@ -62,8 +62,12 @@ export function Cursor() {
       }
     };
 
-    const handleMouseDown = () => setClicking(true);
-    const handleMouseUp = () => setClicking(false);
+    const handleMouseDown = () => {
+      isMouseDown = true;
+    };
+    const handleMouseUp = () => {
+      isMouseDown = false;
+    };
     const handleMouseEnter = () => setVisible(true);
     const handleMouseLeave = () => setVisible(false);
 
@@ -77,11 +81,14 @@ export function Cursor() {
       ringX += (mouseX - ringX) * 0.22;
       ringY += (mouseY - ringY) * 0.22;
 
+      const dotScale = isMouseDown ? 0.75 : 1;
+      const ringScale = isMouseDown ? 0.92 : 1;
+
       if (dotRef.current) {
-        dotRef.current.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+        dotRef.current.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%) scale(${dotScale})`;
       }
       if (ringRef.current) {
-        ringRef.current.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
+        ringRef.current.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%) scale(${ringScale})`;
       }
 
       raf = requestAnimationFrame(loop);
@@ -135,18 +142,16 @@ export function Cursor() {
       <div
         ref={dotRef}
         className={cn(
-          "absolute left-0 top-0 h-3.5 w-3.5 rounded-full border-2 transition-[background-color,border-color,transform] duration-150 ease-out",
-          dotColorClass,
-          clicking && "scale-75"
+          "absolute left-0 top-0 h-3.5 w-3.5 rounded-full border-2 transition-[background-color,border-color] duration-150 ease-out",
+          dotColorClass
         )}
       />
       {/* Magnetic follower ring */}
       <div
         ref={ringRef}
         className={cn(
-          "absolute left-0 top-0 grid place-items-center rounded-full border-[3px] select-none transition-[width,height,background-color,border-color,transform] duration-150 ease-out",
-          ringThemeClass,
-          clicking && "scale-90"
+          "absolute left-0 top-0 grid place-items-center rounded-full border-[3px] select-none transition-[width,height,background-color,border-color] duration-150 ease-out",
+          ringThemeClass
         )}
       >
         {hover && (

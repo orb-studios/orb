@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
-import { Cursor, Navbar, TopStrip } from "./components/chrome";
+import { Cursor, Navbar } from "./components/chrome";
 import { Landing } from "./pages/Landing";
 import { Play } from "./pages/Play";
+import { sound } from "./utils/sound";
 
 /*
   ═══════════════════════════════════════════════════════════════
@@ -54,6 +55,24 @@ export default function App() {
   const [page, setPage] = useState<"home" | "play">("home");
   const [credits, setCredits] = useState(3);
   const [bursts, setBursts] = useState<{ id: number; x: number; y: number }[]>([]);
+  const [soundEnabled, setSoundEnabled] = useState(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("orb_sound");
+      return saved !== null ? saved === "true" : true;
+    }
+    return true;
+  });
+
+  const toggleSound = useCallback(() => {
+    setSoundEnabled((prev) => {
+      const next = !prev;
+      if (typeof window !== "undefined") {
+        localStorage.setItem("orb_sound", String(next));
+      }
+      sound.toggle(next);
+      return next;
+    });
+  }, []);
 
   const go = useCallback((p: "home" | "play") => {
     setPage(p);
@@ -62,17 +81,18 @@ export default function App() {
 
   const addCoin = useCallback((e?: { clientX: number; clientY: number }) => {
     setCredits((c) => Math.min(c + 1, 99));
+    sound.coin(soundEnabled);
     if (e) {
       const id = Date.now() + Math.random();
       setBursts((b) => [...b.slice(-5), { id, x: e.clientX, y: e.clientY }]);
       setTimeout(() => setBursts((b) => b.filter((x) => x.id !== id)), 900);
     }
-  }, []);
+  }, [soundEnabled]);
 
   const handleCoinClick = useCallback(
     (ev: React.MouseEvent | undefined) => {
       if (ev && "clientX" in ev) addCoin({ clientX: ev.clientX, clientY: ev.clientY });
-      else setCredits((c) => Math.min(c + 1, 99));
+      else addCoin();
     },
     [addCoin]
   );
@@ -84,12 +104,18 @@ export default function App() {
   return (
     <div key={page} className="min-h-screen bg-[#FFF7E8] text-[#111110]">
       <Cursor />
-      <TopStrip credits={credits} onCoin={() => setCredits((c) => Math.min(c + 1, 99))} />
-      <Navbar page={page} go={go} />
+      <Navbar
+        page={page}
+        go={go}
+        credits={credits}
+        onCoin={() => addCoin()}
+        soundEnabled={soundEnabled}
+        onToggleSound={toggleSound}
+      />
 
       <div className="animate-[pop-in_0.4s_ease-out]">
         {page === "home" ? (
-          <Landing go={go} onCoin={() => setCredits((c) => Math.min(c + 1, 99))} />
+          <Landing go={go} onCoin={() => addCoin()} />
         ) : (
           <Play go={go} credits={credits} />
         )}

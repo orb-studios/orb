@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Gamepad2, Menu, X, Coins, Volume2 } from "lucide-react";
+import { Gamepad2, Menu, X, Coins, Volume2, VolumeX } from "lucide-react";
 import { cn } from "../utils/cn";
 
 /* ---------- custom cursor ---------- */
@@ -181,33 +181,22 @@ export function Cursor() {
   );
 }
 
-/* ---------- top utility strip ---------- */
-export function TopStrip({ credits, onCoin }: { credits: number; onCoin: () => void }) {
-  return (
-    <div className="relative z-[60] flex items-center justify-between gap-4 overflow-hidden border-b-[3px] border-[#111110] bg-[#111110] px-4 py-1.5 text-white md:px-8">
-      <p className="truncate font-pixel text-[10px] tracking-[0.25em] md:text-[11px]">
-        ORB STUDIOS <span className="text-[#FFD900]">★</span> INDIE ARCADE TCG <span className="text-[#FFD900]">★</span>{" "}
-        <span className="hidden sm:inline">16 CARDS REVEALED — BY ANIRUDH &amp; LAKSHYA (GANU)</span>
-      </p>
-      <div className="flex shrink-0 items-center gap-3">
-        <button
-          onClick={onCoin}
-          className="group flex cursor-pointer items-center gap-1.5 rounded-full border-2 border-white/30 bg-white/10 px-3 py-0.5 font-pixel text-[11px] tracking-widest transition hover:border-[#FFD900] hover:bg-[#FFD900] hover:text-[#111110]"
-          title="Insert coin"
-        >
-          <Coins className="h-3.5 w-3.5 transition group-hover:animate-wiggle" />
-          {String(credits).padStart(2, "0")} COINS
-        </button>
-        <span className="hidden items-center gap-1.5 font-pixel text-[11px] tracking-widest text-white/60 md:flex">
-          <Volume2 className="h-3.5 w-3.5" /> SOUND: ON
-        </span>
-      </div>
-    </div>
-  );
-}
-
 /* ---------- navbar ---------- */
-export function Navbar({ page, go }: { page: "home" | "play"; go: (p: "home" | "play") => void }) {
+export function Navbar({
+  page,
+  go,
+  credits,
+  onCoin,
+  soundEnabled,
+  onToggleSound,
+}: {
+  page: "home" | "play";
+  go: (p: "home" | "play") => void;
+  credits: number;
+  onCoin: () => void;
+  soundEnabled: boolean;
+  onToggleSound: () => void;
+}) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -265,12 +254,44 @@ export function Navbar({ page, go }: { page: "home" | "play"; go: (p: "home" | "
           ))}
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
+          {/* Coins button */}
+          <button
+            onClick={onCoin}
+            className="group flex cursor-pointer items-center gap-1.5 rounded-full border-2 border-[#111110] bg-[#FFD900] px-2.5 py-1 font-pixel text-[11px] tracking-wider shadow-[2px_2px_0_#111110] transition hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none sm:px-3 sm:text-xs"
+            title="Insert Coin"
+          >
+            <Coins className="h-3.5 w-3.5 transition group-hover:animate-wiggle" />
+            <span>{String(credits).padStart(2, "0")} COINS</span>
+          </button>
+
+          {/* Sound Toggle Button */}
+          <button
+            onClick={onToggleSound}
+            className={cn(
+              "flex h-9 cursor-pointer items-center gap-1.5 rounded-lg border-2 border-[#111110] px-2.5 font-pixel text-[11px] tracking-wider shadow-[2px_2px_0_#111110] transition hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none",
+              soundEnabled
+                ? "bg-white text-[#111110] hover:bg-[#FFD900]"
+                : "bg-[#111110]/10 text-[#111110]/50 hover:bg-[#111110]/20"
+            )}
+            title={soundEnabled ? "Sound: ON (click to mute)" : "Sound: MUTED (click to enable)"}
+            aria-label={soundEnabled ? "Sound: ON (click to mute)" : "Sound: MUTED (click to enable)"}
+          >
+            {soundEnabled ? (
+              <Volume2 className="h-3.5 w-3.5 text-[#FF0B0B]" />
+            ) : (
+              <VolumeX className="h-3.5 w-3.5" />
+            )}
+            <span className="hidden md:inline font-bold">
+              {soundEnabled ? "SOUND: ON" : "MUTED"}
+            </span>
+          </button>
+
           <button
             onClick={() => go("play")}
             data-cursor={page === "play" ? undefined : "go"}
             className={cn(
-              "hidden cursor-pointer items-center gap-2 border-[3px] border-[#111110] px-5 py-2.5 font-display text-sm shadow-[4px_4px_0_#111110] transition hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_#111110] sm:inline-flex",
+              "hidden cursor-pointer items-center gap-2 border-[3px] border-[#111110] px-5 py-2 font-display text-sm shadow-[4px_4px_0_#111110] transition hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_#111110] sm:inline-flex",
               page === "play" ? "bg-[#111110] text-white" : "bg-[#FF0B0B] text-white hover:bg-[#d60000]"
             )}
           >
@@ -278,9 +299,10 @@ export function Navbar({ page, go }: { page: "home" | "play"; go: (p: "home" | "
             {page === "play" ? "BACK HOME" : "PLAY NOW"}
             <span className="font-jp text-xs opacity-80">プレイ</span>
           </button>
+
           <button
             onClick={() => setOpen(!open)}
-            className="grid h-11 w-11 cursor-pointer place-items-center border-[3px] border-[#111110] bg-white shadow-[4px_4px_0_#111110] lg:hidden"
+            className="grid h-10 w-10 cursor-pointer place-items-center border-[2.5px] border-[#111110] bg-white shadow-[3px_3px_0_#111110] lg:hidden"
             aria-label="Menu"
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -301,6 +323,27 @@ export function Navbar({ page, go }: { page: "home" | "play"; go: (p: "home" | "
               <span className="font-jp text-sm opacity-50">{l.jp} — 0{i + 1}</span>
             </a>
           ))}
+
+          <div className="mt-4 flex items-center justify-between gap-3 border-b-2 border-dashed border-[#111110]/20 pb-4">
+            <button
+              onClick={onCoin}
+              className="flex cursor-pointer items-center gap-1.5 rounded-full border-2 border-[#111110] bg-[#FFD900] px-3.5 py-1.5 font-pixel text-xs shadow-[2px_2px_0_#111110]"
+            >
+              <Coins className="h-4 w-4" />
+              <span>{String(credits).padStart(2, "0")} COINS</span>
+            </button>
+            <button
+              onClick={onToggleSound}
+              className={cn(
+                "flex cursor-pointer items-center gap-2 rounded-lg border-2 border-[#111110] px-3 py-1.5 font-pixel text-xs shadow-[2px_2px_0_#111110]",
+                soundEnabled ? "bg-white" : "bg-black/10 text-black/50"
+              )}
+            >
+              {soundEnabled ? <Volume2 className="h-4 w-4 text-[#FF0B0B]" /> : <VolumeX className="h-4 w-4" />}
+              <span>{soundEnabled ? "SOUND: ON" : "SOUND: MUTED"}</span>
+            </button>
+          </div>
+
           <button
             onClick={() => { setOpen(false); go("play"); }}
             data-cursor="go"

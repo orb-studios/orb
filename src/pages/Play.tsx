@@ -38,13 +38,13 @@ export function Play({ go, credits }: { go: (p: "home" | "play") => void; credit
               <br />
               <span className="text-[#FF0B0B] [text-shadow:3px_3px_0_white]">LOADING{dots}</span>
             </h1>
-            <p className="mx-auto mt-4 max-w-md text-[15px] leading-relaxed text-white/65">
-              This page is intentionally empty — the duel engine is still being
-              soldered together by extremely tired goblins.
+            <p className="mx-auto mt-4 max-w-md text-[15px] leading-relaxed text-white/70">
+              The full online duel engine is currently in active development by Anirudh &amp; Lakshya.
+              In the meantime, you can play on the existing live web app at <a href="https://orbtcg.vercel.app" target="_blank" rel="noreferrer" className="text-[#FFD900] underline hover:text-white">orbtcg.vercel.app</a> or inspect the cards in the showcase!
               <span className="font-jp font-bold text-white/90"> もうすこし まってね！</span>
             </p>
             <p className="mt-6 animate-blink font-pixel text-sm tracking-[0.4em] text-[#FFD900]">
-              ► PRESS START TO GO BACK ◄
+              ► CHOOSE AN OPTION ◄
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-4">
               <Magnetic>
@@ -55,12 +55,22 @@ export function Play({ go, credits }: { go: (p: "home" | "play") => void; credit
                   <ArrowLeft className="h-5 w-5" /> BACK TO SHOWCASE
                 </button>
               </Magnetic>
+              <Magnetic>
+                <a
+                  href="https://orbtcg.vercel.app"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex cursor-pointer items-center gap-2.5 border-[3.5px] border-white bg-[#FFD900] px-8 py-4 font-display text-lg text-[#111110] shadow-[6px_6px_0_white] transition hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[3px_3px_0_white]"
+                >
+                  PLAY ON ORBTCG (CURRENT APP) ↗
+                </a>
+              </Magnetic>
             </div>
           </div>
-          {/* fake controls */}
+          {/* controls status */}
           <div className="flex items-center justify-center gap-6 border-t-[3px] border-white/20 bg-black/40 px-5 py-4 opacity-50">
             <span className="flex items-center gap-2 font-pixel text-[11px] tracking-[0.25em] text-white/70">
-              <Gamepad2 className="h-4 w-4" /> CONTROLS LOCKED <Lock className="h-3.5 w-3.5" />
+              <Gamepad2 className="h-4 w-4" /> DUEL ENGINE IN PROGRESS <Lock className="h-3.5 w-3.5" />
             </span>
           </div>
         </div>
@@ -73,8 +83,8 @@ export function Play({ go, credits }: { go: (p: "home" | "play") => void; credit
           <ul className="mt-3 space-y-2 font-pixel text-xs tracking-[0.15em] text-white/70">
             <li>[DONE] OFFICIAL SHOWCASE LAUNCH</li>
             <li>[DONE] 16 CREATURE CARDS REVEALED (45 IN TOTAL SET)</li>
-            <li className="text-white">[WIP] DUEL ENGINE — PROTOTYPING{dots}</li>
-            <li className="opacity-50">[TODO] ONLINE DUELS — IN DEVELOPMENT</li>
+            <li className="text-white">[WIP] DUEL ENGINE — ACTIVE DEVELOPMENT{dots}</li>
+            <li className="opacity-50">[TODO] ONLINE DUELS &amp; MATCHMAKING</li>
           </ul>
         </div>
       </div>

@@ -205,6 +205,7 @@ export function Navbar({
   const links = [
     { label: "CARDS", jp: "カード", href: "#deck" },
     { label: "ELEMENTS", jp: "ぞくせい", href: "#elements" },
+    { label: "REVIEWS", jp: "こえ", href: "#reviews" },
     { label: "HOW TO PLAY", jp: "あそびかた", href: "#how" },
     { label: "PACKS", jp: "パック", href: "#packs" },
   ];

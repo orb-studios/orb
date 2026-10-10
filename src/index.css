@@ -4,7 +4,7 @@
   --font-display: "Dela Gothic One", "Zen Kaku Gothic New", system-ui, sans-serif;
   --font-bubble: "Titan One", "Dela Gothic One", system-ui, sans-serif;
   --font-body: "Space Grotesk", "Zen Kaku Gothic New", system-ui, sans-serif;
-  --font-pixel: "Pixelify Sans", "DotGothic16", monospace;
+  --font-pixel: "Space Grotesk", "Zen Kaku Gothic New", system-ui, sans-serif;
   --font-jp: "Zen Kaku Gothic New", "Dela Gothic One", sans-serif;
 
   --color-orb: #ff0b0b;
@@ -24,8 +24,8 @@
   --shadow-sticker-lg: 10px 10px 0 #111110;
   --shadow-sticker-red: 6px 6px 0 #c40000;
 
-  --animate-marquee: marquee 22s linear infinite;
-  --animate-marquee-fast: marquee 14s linear infinite;
+  --animate-marquee: marquee 26s linear infinite;
+  --animate-marquee-fast: marquee 26s linear infinite;
   --animate-marquee-rev: marquee-rev 26s linear infinite;
   --animate-spin-slow: spin 14s linear infinite;
   --animate-spin-slower: spin 26s linear infinite;

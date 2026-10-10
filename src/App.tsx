@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { Cursor, Navbar, TopStrip, SampleNoticeBanner } from "./components/chrome";
+import { Cursor, Navbar, TopStrip } from "./components/chrome";
 import { Landing } from "./pages/Landing";
 import { Play } from "./pages/Play";
 
@@ -85,7 +85,6 @@ export default function App() {
     <div key={page} className="min-h-screen bg-[#FFF7E8] text-[#111110]">
       <Cursor />
       <TopStrip credits={credits} onCoin={() => setCredits((c) => Math.min(c + 1, 99))} />
-      <SampleNoticeBanner />
       <Navbar page={page} go={go} />
 
       <div className="animate-[pop-in_0.4s_ease-out]">

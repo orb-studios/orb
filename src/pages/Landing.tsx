@@ -42,7 +42,7 @@ function WallOfLove() {
         </div>
       </div>
       <div className="border-t-[3.5px] border-[#111110] bg-[#111110] py-2.5 text-white">
-        <Marquee fast>
+        <Marquee>
           {Array.from({ length: 6 }).map((_, i) => (
             <span key={i} className="flex items-center gap-6 pr-6 font-pixel text-xs tracking-[0.3em]">
               <span>* * * * *</span>

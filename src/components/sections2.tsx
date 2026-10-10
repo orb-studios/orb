@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Package, Swords, TrendingUp, Sparkles, RotateCcw, Gamepad2, ArrowRight, Discord, Twitter, Youtube, MapPin } from "./icons";
+import { Package, Swords, TrendingUp, Sparkles, RotateCcw, Gamepad2, ArrowRight, MapPin, Github } from "./icons";
 import { CARDS, ELEMENT_META } from "../data/cards";
 import { ArcadeButton, JPBadge, Magnetic, Marquee, SectionHeader, Starburst } from "./ui";
 import { ElementIcon, TCGCard } from "./TCGCard";
@@ -291,17 +291,26 @@ export function Footer({ go }: { go: (p: "home" | "play") => void }) {
               An indie arcade card game created by two friends. Hand-drawn art by Lakshya (ganu), code &amp; build by Anirudh (anonspud).
             </p>
             <div className="mt-4 flex gap-2.5">
-              {[Discord, Twitter, Youtube].map((Icon, i) => (
-                <a
-                  key={i}
-                  href="#"
-                  onClick={(e) => e.preventDefault()}
-                  className="grid h-10 w-10 place-items-center rounded-lg border-[3px] border-[#111110] bg-white shadow-[3px_3px_0_#111110] transition hover:-translate-y-1 hover:bg-[#FFD900]"
-                  aria-label="social"
-                >
-                  <Icon className="h-4.5 w-4.5" />
-                </a>
-              ))}
+              <a
+                href="https://github.com/anonspud/orb-studios"
+                target="_blank"
+                rel="noreferrer"
+                className="grid h-10 w-10 place-items-center rounded-lg border-[3px] border-[#111110] bg-white shadow-[3px_3px_0_#111110] transition hover:-translate-y-1 hover:bg-[#FFD900]"
+                aria-label="GitHub Repository"
+                title="GitHub Repository"
+              >
+                <Github className="h-4.5 w-4.5" />
+              </a>
+              <a
+                href="https://orbtcg.vercel.app"
+                target="_blank"
+                rel="noreferrer"
+                className="grid h-10 w-10 place-items-center rounded-lg border-[3px] border-[#111110] bg-white shadow-[3px_3px_0_#111110] transition hover:-translate-y-1 hover:bg-[#FFD900]"
+                aria-label="Play Game on orbtcg.vercel.app"
+                title="Play on orbtcg.vercel.app"
+              >
+                <Gamepad2 className="h-4.5 w-4.5" />
+              </a>
             </div>
           </div>
           <div>
@@ -348,20 +357,17 @@ export function Footer({ go }: { go: (p: "home" | "play") => void }) {
           </p>
         </div>
 
-        {/* giant outline text */}
-        <div className="pointer-events-none mt-6 select-none overflow-hidden" aria-hidden>
-          <p className="text-outline whitespace-nowrap text-center font-display text-[22vw] leading-[0.85] opacity-[0.08] md:text-[13rem]">
-            orb orb orb
+        {/* giant outline studio watermark */}
+        <div className="pointer-events-none mt-8 select-none overflow-hidden" aria-hidden>
+          <p className="text-outline whitespace-nowrap text-center font-display text-[8.5vw] uppercase leading-none tracking-[0.08em] opacity-[0.07] md:text-[5.5rem] lg:text-[6.8rem]">
+            ORB STUDIOS
           </p>
         </div>
 
         <div className="ticket-edge opacity-25" />
         <div className="flex flex-col items-center justify-between gap-3 py-5 font-pixel text-[10px] tracking-[0.2em] text-[#111110]/55 md:flex-row md:text-[11px]">
           <p>© 2026 ORB STUDIOS — ALL RIGHTS RESERVED ● 無断転載禁止</p>
-          <p className="flex items-center gap-2">
-            <span className="inline-block h-2.5 w-2.5 animate-blink rounded-full bg-[#2fbf4a]" />
-            SERVERS: GENKI — v0.9.1 BETA
-          </p>
+          <p className="flex items-center gap-2">HAND-CRAFTED WITH ♥ IN INDIA</p>
         </div>
       </div>
     </footer>

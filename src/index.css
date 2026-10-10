@@ -96,6 +96,8 @@ body {
 ::selection {
   background: var(--color-orb);
   color: white;
+  -webkit-text-fill-color: white;
+  text-shadow: none;
 }
 
 /* ---------- custom utilities ---------- */

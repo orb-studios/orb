@@ -74,7 +74,7 @@ export function Hero({ go, onCoin }: { go: (p: "home" | "play") => void; onCoin:
 
           <p className="mx-auto mt-5 max-w-[480px] font-display text-xl leading-snug text-white [text-shadow:3px_3px_0_#111110] md:text-2xl lg:mx-0">
             A TINY ARCADE TCG WITH A{" "}
-            <span className="bg-[#111110] px-2 text-[#FFD900]">HUGE HEART</span>
+            <span className="bg-[#111110] text-[#FFD900]">HUGE HEART</span>
           </p>
           <p className="mx-auto mt-3 max-w-[440px] text-[15px] font-medium leading-relaxed text-white/95 [text-shadow:1px_1px_0_rgba(0,0,0,0.4)] lg:mx-0">
             Collect 45 hand-drawn creatures, build a rowdy little deck, and duel

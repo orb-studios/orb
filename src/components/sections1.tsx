@@ -42,7 +42,7 @@ export function Manifesto() {
                 <JPBadge jp="インディー" en="INDIE" bg="white" className="hidden sm:inline-flex" />
               </div>
               <p className="font-display text-2xl leading-snug md:text-[1.7rem]">
-                We missed the <span className="bg-[#FFD900] px-1.5">crinkle of a fresh pack</span> on
+                We missed the <span className="bg-[#FFD900]">crinkle of a fresh pack</span> on
                 the walk home from the arcade —
               </p>
               <p className="mt-4 text-[15.5px] leading-relaxed text-[#111110]/75">

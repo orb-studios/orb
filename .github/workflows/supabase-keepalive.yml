@@ -11,20 +11,22 @@ jobs:
     name: Ping Supabase Database
     runs-on: ubuntu-latest
     steps:
-      - name: Ping Supabase REST and Auth endpoints
+      - name: Ping Supabase Database Table
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
         run: |
-          echo "Pinging Supabase REST API..."
-          curl -s -f -o /dev/null -w "REST API Status: %{http_code}\n" \
-            "${SUPABASE_URL}/rest/v1/" \
+          echo "Executing keep-alive query against Supabase PostgreSQL..."
+          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+            "${SUPABASE_URL}/rest/v1/_keepalive?select=*" \
             -H "apikey: ${SUPABASE_ANON_KEY}" \
-            -H "Authorization: Bearer ${SUPABASE_ANON_KEY}" || echo "REST ping completed"
+            -H "Authorization: Bearer ${SUPABASE_ANON_KEY}")
 
-          echo "Pinging Supabase Auth Health..."
-          curl -s -f -o /dev/null -w "Auth Health Status: %{http_code}\n" \
-            "${SUPABASE_URL}/auth/v1/health" \
-            -H "apikey: ${SUPABASE_ANON_KEY}" || echo "Auth ping completed"
+          echo "Supabase PostgREST Query Status: ${HTTP_STATUS}"
 
-          echo "Supabase keep-alive ping successful!"
+          if [ "${HTTP_STATUS}" -ne 200 ]; then
+            echo "::error::Supabase query returned status ${HTTP_STATUS}. Expected 200."
+            exit 1
+          fi
+
+          echo "Supabase database successfully pinged and active!"

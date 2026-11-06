@@ -2,8 +2,9 @@ name: Supabase Keep-Alive
 
 on:
   schedule:
-    # Runs at 04:00 UTC every 3 days (well within Supabase's 7-day pause window)
-    - cron: '0 4 */3 * *'
+    # Runs twice every day at 04:00 UTC and 16:00 UTC
+    # Ensures database activity every single day to exceed Supabase's daily activity threshold
+    - cron: '0 4,16 * * *'
   workflow_dispatch: # Allows manual trigger anytime from the GitHub Actions tab
 
 jobs:
@@ -16,17 +17,36 @@ jobs:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
         run: |
-          echo "Executing keep-alive query against Supabase PostgreSQL..."
-          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+          echo "1. Executing keep-alive write transaction via RPC..."
+          RPC_RESPONSE=$(curl -s -w "\n%{http_code}" -X POST \
+            "${SUPABASE_URL}/rest/v1/rpc/ping_keepalive" \
+            -H "apikey: ${SUPABASE_ANON_KEY}" \
+            -H "Authorization: Bearer ${SUPABASE_ANON_KEY}" \
+            -H "Content-Type: application/json" \
+            -d '{}')
+
+          RPC_STATUS=$(echo "${RPC_RESPONSE}" | tail -n1)
+          RPC_BODY=$(echo "${RPC_RESPONSE}" | sed '$d')
+
+          echo "Supabase RPC Status: ${RPC_STATUS}"
+          echo "Supabase Updated Ping Timestamp: ${RPC_BODY}"
+
+          if [ "${RPC_STATUS}" -ne 200 ]; then
+            echo "::error::Supabase RPC returned status ${RPC_STATUS}. Expected 200."
+            exit 1
+          fi
+
+          echo "2. Executing keep-alive read query..."
+          READ_STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
             "${SUPABASE_URL}/rest/v1/_keepalive?select=*" \
             -H "apikey: ${SUPABASE_ANON_KEY}" \
             -H "Authorization: Bearer ${SUPABASE_ANON_KEY}")
 
-          echo "Supabase PostgREST Query Status: ${HTTP_STATUS}"
+          echo "Supabase PostgREST Query Status: ${READ_STATUS}"
 
-          if [ "${HTTP_STATUS}" -ne 200 ]; then
-            echo "::error::Supabase query returned status ${HTTP_STATUS}. Expected 200."
+          if [ "${READ_STATUS}" -ne 200 ]; then
+            echo "::error::Supabase read query returned status ${READ_STATUS}. Expected 200."
             exit 1
           fi
 
-          echo "Supabase database successfully pinged and active!"
+          echo "Supabase database successfully pinged, updated, and active!"
